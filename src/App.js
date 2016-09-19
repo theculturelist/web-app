@@ -46,9 +46,9 @@ class App extends Component {
   render() {
     if (this.state.appLoading === false) {
       return (
-        <div className="application">
+        <div className="application cf">
           <Header />
-          <section className="content-body pt5">
+          <section className="content-body pt5 mh2">
             {this.state.venues.map((venue) => (
               <Venue
                 key={venue.id}

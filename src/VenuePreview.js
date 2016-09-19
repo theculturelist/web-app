@@ -18,15 +18,21 @@ class Venue extends Component {
 
   render() {
     return (
-      <article className="pointer cf ba b--gray mv3 br2 fl w-100 w-50-ns animated slideInUp">
-        <div className="pv2 ph2">
-           <h1 className="f6 ttu dark-gray">{this.props.name}</h1>
-        </div>
-        <img src={cloudinaryPrefix + this.props.imageUrl} className="w-100" alt={this.props.title} />
-        <div className="pa3">
-          <a href="#" className="link f6">{this.props.address}</a>
-          <small className="gray db pv2">Hours Today: </small>
-          <small className="gray db pv2">Distance Away - {this.props.distance}</small>
+      <article className="pointer pa3 fl w-100 w-50-ns animated fadeIn">
+        <div className="ba br2 b--gray">
+          <div className="pv2 ph2">
+             <h1 className="f6 ttu dark-gray">{this.props.name}</h1>
+          </div>
+          <img
+            src={cloudinaryPrefix + this.props.imageUrl}
+            className="w-100"
+            alt={this.props.title}
+          />
+          <div className="pa3">
+            <a href="#" className="link f6">{this.props.address}</a>
+            <small className="gray db pv2">Hours Today: </small>
+            <small className="gray db pv2">Distance Away - {this.props.distance}</small>
+          </div>
         </div>
       </article>
     );
