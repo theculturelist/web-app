@@ -1,9 +1,31 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import ReactSpinner from 'react-spinjs';
 import animate from 'animate.css'; //eslint-disable-line
 import tachyons from 'tachyons'; //eslint-disable-line
 import Header from './Header';
 import Venue from './VenuePreview';
+
+const spinnerOpts = {
+  lines: 11,
+  length: 56,
+  width: 10,
+  radius: 48,
+  corners: 1,
+  color: '#000',
+  opacity: 0.25,
+  rotate: 0,
+  direction: 1,
+  speed: 1,
+  trail: 60 ,
+  fps: 20,
+  zIndex: 2e9,
+  top: '30%',
+  left: '50%',
+  shadow: false,
+  hwaccel: true,
+  position: 'absolute'
+};
 
 class App extends Component {
   constructor(props) {
@@ -42,7 +64,7 @@ class App extends Component {
       )
     }
 
-    return (<h1>Loading</h1>)
+    return (<ReactSpinner config={spinnerOpts}/>)
   }
 }
 
