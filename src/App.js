@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ReactSpinner from 'react-spinjs';
-import animate from 'animate.css'; //eslint-disable-line
-import tachyons from 'tachyons'; //eslint-disable-line
 import Header from './Header';
-import Venue from './VenuePreview';
+import VenuePreview from './VenuePreview';
 
 const spinnerOpts = {
-  lines: 11,
-  length: 56,
+  lines: 13,
+  length: 45,
   width: 10,
   radius: 48,
   corners: 1,
@@ -46,25 +44,29 @@ class App extends Component {
   render() {
     if (this.state.appLoading === false) {
       return (
-        <div className="application cf">
+        <div>
           <Header />
-          <section className="content-body pt5 mh2">
+          <section className="pt5 mh2">
             {this.state.venues.map((venue) => (
-              <Venue
+              <VenuePreview
                 key={venue.id}
                 name={venue.name}
                 imageUrl={venue.media[0].widescreen}
                 address={venue.address.formatted_address}
-                distance={venue.location.lat}
+                location={venue.location}
               />
             ))}
-
           </section>
         </div>
-      )
+      );
     }
 
-    return (<ReactSpinner config={spinnerOpts}/>)
+    return (
+      <div className="loading-app">
+        <Header />
+        <ReactSpinner config={spinnerOpts}/>
+      </div>
+    );
   }
 }
 
