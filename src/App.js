@@ -22,18 +22,18 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.loading === false) {
+    if (this.state.appLoading === false) {
       return (
         <div className="application">
           <Header />
-          <section className="content-body">
+          <section className="content-body pt5">
             {this.state.venues.map((venue) => (
               <Venue
                 key={venue.id}
                 name={venue.name}
                 imageUrl={venue.media[0].widescreen}
                 address={venue.address.formatted_address}
-                distance={venue.location.latitude}
+                distance={venue.location.lat}
               />
             ))}
 

@@ -3,12 +3,9 @@ import React from 'react';
 class Header extends React.Component {
   render() {
     return (
-      <header className="bg-black-80 w-100 ph3 pv3 pv4-ns ph4-m ph5-l">
-        <nav className="f6 fw6 ttu tracked tr">
-          <a className="link dim white dib mr3" href="#" title="Home">Home</a>
-          <a className="link dim white dib mr3" href="#" title="About">Blog</a>
-          <a className="link dim white dib mr3" href="#" title="Store">About</a>
-          <a className="link dim white dib" href="#" title="Contact">Contact</a>
+      <header className="fixed bg-dark-gray w-100 pv2 z-1">
+        <nav className="tc">
+          <img className="w2" src="http://res.cloudinary.com/theculturelist/image/upload/q_auto/v1474244678/icon_yh2ghw.svg" alt="App icon"/>
         </nav>
       </header>
     );

@@ -18,11 +18,11 @@ class Venue extends Component {
 
   render() {
     return (
-      <article className="pointer cf ba b--black-30 mv3 mh2 br2 fr w-100 w-third-ns animated slideInUp">
+      <article className="pointer cf ba b--gray mv3 br2 fl w-100 w-50-ns animated slideInUp">
         <div className="pv2 ph2">
            <h1 className="f6 ttu dark-gray">{this.props.name}</h1>
         </div>
-        <img src={cloudinaryPrefix + this.props.imageUrl} className="grow w-100 db" alt={this.props.title} />
+        <img src={cloudinaryPrefix + this.props.imageUrl} className="w-100" alt={this.props.title} />
         <div className="pa3">
           <a href="#" className="link f6">{this.props.address}</a>
           <small className="gray db pv2">Hours Today: </small>
