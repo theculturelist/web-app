@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 import ReactSpinner from 'react-spinjs';
 import Header from './Header';
 import VenuePreview from './VenuePreview';
 
 const spinnerOpts = {
-  lines: 13,
-  length: 45,
+  lines: 10,
+  length: 30,
   width: 10,
-  radius: 48,
-  corners: 1,
+  radius: 30,
+  corners: 2,
   color: '#000',
   opacity: 0.25,
   rotate: 0,
   direction: 1,
   speed: 1,
-  trail: 60 ,
-  fps: 20,
+  trail: 80 ,
   zIndex: 2e9,
-  top: '30%',
+  top: '50%',
   left: '50%',
   shadow: false,
   hwaccel: true,
