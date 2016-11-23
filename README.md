@@ -1,7 +1,15 @@
 # The Culture List Web App
 
-This is the front end for The Culture List, a pure React.js app.
+This is the front end for The Culture List web app.
 
-Getting started:
+To Develop:
 
-Check out the docs on the [Environment](https://github.com/theculturelist/environment) repository.
+- Install Docker
+- Clone this repository
+- Run `docker-compose up`
+
+NOTE: The Environment Variables in config.js are stored in the .env file, which you'll need to get from @LucasKA
+
+To Deploy:
+
+Deployment is done through Heroku
