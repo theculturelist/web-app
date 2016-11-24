@@ -1,41 +1,64 @@
-import React, { Component, PropTypes as PT} from 'react';
-const cloudinaryPrefix = "http://res.cloudinary.com/theculturelist/image/upload/q_auto";
+import React, { PropTypes as PT} from 'react';
+import { Link } from 'react-router';
+import moment from 'moment';
+import image from 'cloudinary';
+import config from './config';
 
-class Venue extends Component {
-  static propTypes = {
-    name: PT.string.isRequired,
-    imageUrl: PT.string.isRequired,
-    address: PT.string.isRequired,
-    location: PT.object.isRequired,
-  };
-  static defaultProps = {
-    name: "Coming Soon",
-    imageUrl: "/v1455314704/Placeholder-16x9_zpm4cq.jpg",
-    address: "Your City",
-    distance: "Close",
-  };
+image.config(
+  {
+    cloud_name: config.cloudinary.cloud,
+    api_key: config.cloudinary.api,
+    api_secret: config.cloudinary.secret,
+  }
+)
 
-  render() {
-    return (
-      <article className="pa3 fl w-100-s w-50-m w-third-l animated fadeIn">
+const today = moment().format("dddd").toLowerCase();
+
+const hoursToday = (hours, day) => {
+  return hours.hasOwnProperty(day) ? hours[day] : null
+}
+
+const specialHours = (hours) => (hours ? <small className="gray lh-copy">Special Hours: {hours}</small> : null)
+
+const VenuePreview = (props) => {
+  return (
+    <Link to={`/venues/${props.id}`}>
+      <article className="pa2 pa3-ns fl w-100-s w-50-m w-third-l animated fadeIn">
         <div className="ba br2 b--gray">
-          <header className="pv2 ph3">
-             <h2 className="f5 ttu dark-gray">{this.props.name}</h2>
+          <header className="pv1 ph3">
+             <h2 className="f5 f4-ns lh-title tracked-tight ttu blue">{props.name}</h2>
           </header>
           <img
-            src={cloudinaryPrefix + this.props.imageUrl}
-            className="pointer w-100"
-            alt={this.props.title}
+            className="w-100 pointer dim bt b--gray"
+            src={image.url(props.thumbnail, {quality: 'auto'})}
+            alt={props.name}
           />
           <div className="pa3">
-            <a href="#" className="link f6">{this.props.address}</a>
-            <small className="gray db pv2">Hours Today: </small>
-            <small className="gray db pv2">Distance Away {this.props.distance} </small>
+            <h3 className="f6 lh-copy dark-gray">{props.address}</h3>
+            <h3 className="f6 lh-copy dark-gray">Hours Today: {hoursToday(props.hours, today)}</h3>
+            {specialHours(props.hours.closed_on)}
           </div>
         </div>
       </article>
-    );
-  }
+    </Link>
+  );
 }
 
-export default Venue;
+VenuePreview.propTypes = {
+  address: PT.string.isRequired,
+  distance: PT.string,
+  hours: PT.object,
+  id: PT.string.isRequired,
+  name: PT.string.isRequired,
+  thumbnail: PT.string,
+};
+
+VenuePreview.defaultProps = {
+  address: '123 Street St, Los Angeles, CA 90001',
+  distance: '5mi',
+  id: '1234567890',
+  name: 'Undefined Venue',
+  thumbnail: `Placeholder-16x9_zpm4cq.jpg`,
+};
+
+export default VenuePreview;
