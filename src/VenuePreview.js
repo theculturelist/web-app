@@ -18,24 +18,24 @@ const hoursToday = (hours, day) => {
   return hours.hasOwnProperty(day) ? hours[day] : null
 }
 
-const specialHours = (hours) => (hours ? <small className="gray lh-copy">Special Hours: {hours}</small> : null)
+const specialHours = (hours) => (hours ? <small className="lh-copy">Special Hours: {hours}</small> : null)
 
 const VenuePreview = (props) => {
   return (
     <Link to={`/venues/${props.id}`}>
-      <article className="pa2 pa3-ns fl w-100-s w-50-m w-third-l animated fadeIn">
+      <article className="pa1 pa2-ns fl w-100-s w-50-m w-third-l animated fadeIn">
         <div className="ba br2 b--gray">
-          <header className="pv1 ph3">
-             <h2 className="f5 f4-ns lh-title tracked-tight ttu blue">{props.name}</h2>
+          <header className="ph3">
+             <h2 className="f5 f4-ns fw5 lh-title tracked-tight ttu blue">{props.name}</h2>
           </header>
           <img
             className="w-100 pointer dim bt b--gray"
             src={image.url(props.thumbnail, {quality: 'auto'})}
             alt={props.name}
           />
-          <div className="pa3">
-            <h3 className="f6 lh-copy dark-gray">{props.address}</h3>
-            <h3 className="f6 lh-copy dark-gray">Hours Today: {hoursToday(props.hours, today)}</h3>
+          <div className="ph2 pb3 dark-gray">
+            <h3 className="f6 fw3 lh-copy">{props.address}</h3>
+            <h3 className="f6 fw3 lh-copy">Hours Today: {hoursToday(props.hours, today)}</h3>
             {specialHours(props.hours.closed_on)}
           </div>
         </div>
