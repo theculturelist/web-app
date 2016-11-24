@@ -6,9 +6,9 @@ To Develop:
 
 - Install Docker
 - Clone this repository
+- Add a `.env` file to your directory (get secrets from @LucasKA)
 - Run `docker-compose up`
 
-NOTE: The Environment Variables in config.js are stored in the .env file, which you'll need to get from @LucasKA
 
 To Deploy:
 
