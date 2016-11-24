@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-// import ReactSpinner from 'react-spinjs';
+import ReactSpinner from 'react-spinjs';
 import VenueList from './VenueList';
 import Base from './Base';
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { venues: {} };
+    this.state = { venues: false };
   }
 
   componentWillMount() {
@@ -18,6 +18,6 @@ export default class Home extends Component {
   }
 
   render() {
-    return <VenueList venues={this.state.venues} />
+    return this.state.venues ? <VenueList venues={this.state.venues} /> : <ReactSpinner />
   }
 }
