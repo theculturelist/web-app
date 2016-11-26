@@ -1,16 +1,7 @@
 import React, { PropTypes as PT} from 'react';
 import { Link } from 'react-router';
 import moment from 'moment';
-import image from 'cloudinary';
-import config from './config';
-
-image.config(
-  {
-    cloud_name: config.cloudinary.cloud,
-    api_key: config.cloudinary.api,
-    api_secret: config.cloudinary.secret,
-  }
-)
+import CloudinaryImage from './CloudinaryImage';
 
 const today = moment().format("dddd").toLowerCase();
 
@@ -28,9 +19,10 @@ const VenuePreview = (props) => {
           <header className="ph3">
              <h2 className="f5 f4-ns fw5 lh-title tracked-tight ttu blue">{props.name}</h2>
           </header>
-          <img
+
+          <CloudinaryImage
             className="w-100 pointer dim bt b--gray"
-            src={image.url(props.thumbnail, {quality: 'auto'})}
+            src={props.thumbnail}
             alt={props.name}
           />
           <div className="ph2 pb3 dark-gray">
