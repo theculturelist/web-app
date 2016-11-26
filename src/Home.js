@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactSpinner from 'react-spinjs';
 import VenueList from './VenueList';
-import Base from './Base';
+import base from './Base';
 
 export default class Home extends Component {
   constructor(props) {
@@ -10,11 +10,13 @@ export default class Home extends Component {
   }
 
   componentWillMount() {
-    this.ref = Base.syncState('venues', { context: this, state: 'venues'})
-  }
-
-  componentWillUnmount() {
-    Base.removeBinding(this.ref)
+    base.fetch('venues', {
+      context: this,
+    }).then(data => {
+      this.setState({venues: data});
+    }).catch(error => {
+      //handle error
+    })
   }
 
   render() {

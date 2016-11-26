@@ -1,27 +1,71 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import VenueHeader from './VenueHeader';
+import base from './Base';
+import CloudinaryImage from './CloudinaryImage';
+import ReactSpinner from 'react-spinjs'
 
 export default class Venue extends Component {
   constructor(props) {
     super(props);
-    this.state = { venue: null };
+    this.state = { venue: false };
   }
 
   componentDidMount() {
-    axios.get(`http://api-staging.theculturelist.org/v1/venues/${this.props.params.id}`)
-      .then((response) => {
-        this.setState({ venue: response.data });
-      })
-      .catch((error) => {
-        console.log(error);
-    });
+    base.fetch(`venues/${this.props.params.id}`, { context: this })
+    .then(data => {
+      this.setState({venue: data});
+    })
+  }
+
+  renderSpecialHours(hours) {
+    return hours ? <li className="ph0 pv1 i">Special Hours: {hours}</li> : null
   }
 
   render() {
+    const venue = this.state.venue;
     return (
-      <article className="pa3 fl w-100-s w-50-m w-third-l animated fadeIn">
-        <h1>derp</h1>
-      </article>
+      venue ?
+        <article className="animated slideInRight">
+          <CloudinaryImage
+            alt='Venue Main Image'
+            className='w-100 pt4 mb0 pb0'
+            src={venue.media.widescreen}
+            transform={{quality: 'auto'}}
+          />
+
+          <section className="ph3 dark-gray">
+            <VenueHeader name={venue.name} abbreviation={venue.abbreviation} />
+
+            <div className="bb b--dark-gray" />
+            <div className="w-100 w-50-m w-60-l pr3-ns fl">
+              <p className="f5 f4-ns fw2 georgia">{venue.description}</p>
+            </div>
+            <div className="w-100 w-50-m w-40-l pl3-ns fl">
+
+              <h4 className="f5 f4-ns mb1">Website:</h4>
+              <a className="dark-gray dim fade" href={`http://${venue.website}`} target="_blank">{venue.website}</a>
+
+              <h4 className="f5 f4-ns mb1 pb0">Address:</h4>
+              <p className="mt0 pt0">{venue.address.formatted_address}</p>
+
+              <h4 className="f5 f4-ns mb1">Hours:</h4>
+              <ul className="list mt0 pl0 ml0 f6 f5-ns">
+                <li className="ph0 pv1">Saturday: {venue.hours.saturday}</li>
+                <li className="ph0 pv1">Sunday: {venue.hours.sunday}</li>
+                <li className="ph0 pv1">Monday: {venue.hours.monday}</li>
+                <li className="ph0 pv1">Tuesday: {venue.hours.tuesday}</li>
+                <li className="ph0 pv1">Wednesday: {venue.hours.wednesday}</li>
+                <li className="ph0 pv1">Thursday: {venue.hours.thursday}</li>
+                <li className="ph0 pv1">Friday: {venue.hours.friday}</li>
+                {this.renderSpecialHours(venue.hours.closed_on)}
+              </ul>
+
+              <h4 className="f5 f4-ns mb1">Phone Number:</h4>
+              <p className="mt0 pt0 pb3">{venue.phone.main}</p>
+            </div>
+          </section>
+        </article>
+      : <ReactSpinner />
     );
   }
 }
