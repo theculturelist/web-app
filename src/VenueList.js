@@ -9,8 +9,8 @@ export default class VenueList extends Component {
 
     return (
       <div>
-        <section className="pt5">
-          {venueIds.map((name) => (
+        <section className="pt5 flex flex-wrap content-end">
+          {venueIds.map((name, index) => (
             <VenuePreview
               abbreviation={venues[name].abbreviation}
               address={venues[name].address.formatted_address}

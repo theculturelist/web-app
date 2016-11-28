@@ -13,7 +13,7 @@ const hoursToday = (hours, day) => {
 
 const VenuePreview = (props) => {
   return (
-    <article className="pv3 ph2 w-50-ns animated fadeIn fl">
+    <article className="w-50-ns pa2 animated fadeIn">
       <div className="ba br2 b--light-silver shadow-1 bg-white">
         <VenueHeader name={props.name} />
         <Link to={`/venues/${props.id}`}>
