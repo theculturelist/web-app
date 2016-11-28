@@ -18,6 +18,7 @@ export default class VenueList extends Component {
               id={name}
               key={name}
               name={venues[name].name}
+              tags={venues[name].tags}
               thumbnail={venues[name].media && venues[name].media.widescreen}
             />
           ))}
