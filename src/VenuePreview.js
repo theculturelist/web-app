@@ -1,7 +1,8 @@
 import React, { PropTypes as PT} from 'react';
 import { Link } from 'react-router';
 import moment from 'moment';
-import VenueHeader from './VenueHeader'
+import VenueHeader from './VenueHeader';
+import Tag from './Tag';
 import CloudinaryImage from './CloudinaryImage';
 
 const today = moment().format("dddd").toLowerCase();
@@ -12,23 +13,26 @@ const hoursToday = (hours, day) => {
 
 const VenuePreview = (props) => {
   return (
-    <Link to={`/venues/${props.id}`}>
-      <article className="pv2 ph2 w-50-ns animated fadeIn fl">
-        <div className="ba br2 b--light-silver shadow-1 dim bg-white">
-          <VenueHeader name={props.name} />
+    <article className="pv3 ph2 w-50-ns animated fadeIn fl">
+      <div className="ba br2 b--light-silver shadow-1 bg-white">
+        <VenueHeader name={props.name} />
+        <Link to={`/venues/${props.id}`}>
           <CloudinaryImage
-            className="w-100 pointer bt b--light-silver"
+            className="w-100 pointer dim"
             src={props.thumbnail}
             alt={props.name}
             transform={{quality: 'auto'}}
           />
-          <div className="ph2 pb1 dark-gray">
-            <h3 className="f6 fw3 lh-copy mb1">{props.address}</h3>
-            <h3 className="f6 fw3 lh-copy mt0">Hours Today: {hoursToday(props.hours, today)}</h3>
+        </Link>
+        <div className="ph2 pb3 dark-gray">
+          <h3 className="f5 fw3 lh-copy mb1">{props.address}</h3>
+          <h3 className="f5 fw3 lh-copy mt0">Hours Today: {hoursToday(props.hours, today)}</h3>
+          <div className="tr">
+            {props.tags.map(tag => (<Tag key={tag} name={tag} />))}
           </div>
         </div>
-      </article>
-    </Link>
+      </div>
+    </article>
   );
 }
 
