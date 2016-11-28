@@ -12,6 +12,7 @@ cloudinary.config(
 
 const CloudinaryImage = (props) => {
   return (
+    //TODO RENDER AN SVG WHILE LOADING
     <img
       className={props.className}
       src={cloudinary.url(props.src, props.transform)}

@@ -12,9 +12,12 @@ export default class VenueList extends Component {
         <section className="pt5">
           {venueIds.map((name) => (
             <VenuePreview
-              {...venues[name]}
+              abbreviation={venues[name].abbreviation}
               address={venues[name].address.formatted_address}
+              hours={venues[name].hours}
+              id={name}
               key={name}
+              name={venues[name].name}
               thumbnail={venues[name].media && venues[name].media.widescreen}
             />
           ))}

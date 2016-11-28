@@ -1,6 +1,7 @@
 import React, { PropTypes as PT} from 'react';
 import { Link } from 'react-router';
 import moment from 'moment';
+import VenueHeader from './VenueHeader'
 import CloudinaryImage from './CloudinaryImage';
 
 const today = moment().format("dddd").toLowerCase();
@@ -9,26 +10,21 @@ const hoursToday = (hours, day) => {
   return hours.hasOwnProperty(day) ? hours[day] : null
 }
 
-const specialHours = (hours) => (hours ? <small className="lh-copy">Special Hours: {hours}</small> : null)
-
 const VenuePreview = (props) => {
   return (
     <Link to={`/venues/${props.id}`}>
-      <article className="pa1 pa2-ns fl w-100-s w-50-m w-third-l animated fadeIn">
-        <div className="ba br2 b--gray">
-          <header className="ph3">
-             <h2 className="f5 f4-ns fw5 lh-title tracked-tight ttu blue">{props.name}</h2>
-          </header>
-
+      <article className="pv2 ph2 w-50-ns animated fadeIn fl">
+        <div className="ba br2 b--light-silver shadow-1 dim bg-white">
+          <VenueHeader name={props.name} />
           <CloudinaryImage
-            className="w-100 pointer dim bt b--gray"
+            className="w-100 pointer bt b--light-silver"
             src={props.thumbnail}
             alt={props.name}
+            transform={{quality: 'auto'}}
           />
-          <div className="ph2 pb3 dark-gray">
-            <h3 className="f6 fw3 lh-copy">{props.address}</h3>
-            <h3 className="f6 fw3 lh-copy">Hours Today: {hoursToday(props.hours, today)}</h3>
-            {specialHours(props.hours.closed_on)}
+          <div className="ph2 pb1 dark-gray">
+            <h3 className="f6 fw3 lh-copy mb1">{props.address}</h3>
+            <h3 className="f6 fw3 lh-copy mt0">Hours Today: {hoursToday(props.hours, today)}</h3>
           </div>
         </div>
       </article>
