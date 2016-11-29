@@ -25,10 +25,10 @@ export default class Venue extends Component {
     const venue = this.state.venue;
     return (
       venue ?
-        <article className="animated slideInRight">
+        <article className="pt5 animated slideInRight">
           <CloudinaryImage
             alt='Venue Main Image'
-            className='w-100 pt4 mb0 pb0'
+            className='w-100 mb0 pb0'
             src={venue.media.widescreen}
             transform={{quality: 'auto'}}
           />

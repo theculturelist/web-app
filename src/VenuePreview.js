@@ -13,18 +13,18 @@ const hoursToday = (hours, day) => {
 
 const VenuePreview = (props) => {
   return (
-    <article className="w-50-ns pa2 animated fadeIn">
-      <div className="ba br2 b--light-silver shadow-1 bg-white">
+    <article className="w-50-ns pa2 pa2-l animated fadeIn">
+      <div className="br2 b--light-gray shadow-2 bg-white">
         <VenueHeader name={props.name} />
         <Link to={`/venues/${props.id}`}>
           <CloudinaryImage
-            className="w-100 pointer dim"
+            className="w-100 pointer dim bt bb b--light-gray"
             src={props.thumbnail}
             alt={props.name}
             transform={{quality: 'auto'}}
           />
         </Link>
-        <div className="ph2 pb3 dark-gray">
+        <div className="ph3 pb3">
           <h3 className="f5 fw3 lh-copy mb1">{props.address}</h3>
           <h3 className="f5 fw3 lh-copy mt0">Hours Today: {hoursToday(props.hours, today)}</h3>
           <div className="tr">
