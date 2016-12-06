@@ -5,7 +5,7 @@ const renderAbbreviation = (abbr) => (abbr ? `(${abbr})` : null)
 const VenueHeader = (props) => {
   return (
     <header>
-      <h1 className="f4 f3-ns fw3 fw1-ns tc mb0 pv3 ph2 blue ">
+      <h1 className="f4 f3-ns fw3 fw1-l tc mb0 pv3 ph2 blue">
         {props.name} {renderAbbreviation(props.abbreviation)}
       </h1>
     </header>
