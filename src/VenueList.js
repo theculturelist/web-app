@@ -9,7 +9,7 @@ export default class VenueList extends Component {
 
     return (
       <div>
-        <section className="pt5 flex flex-wrap content-end bg-near-white">
+        <section className="pt5 flex flex-wrap">
           {venueIds.map((name, index) => (
             <VenuePreview
               abbreviation={venues[name].abbreviation}

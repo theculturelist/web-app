@@ -13,8 +13,8 @@ const hoursToday = (hours, day) => {
 
 const VenuePreview = (props) => {
   return (
-    <article className="w-50-ns pa2 pa2-l animated fadeIn">
-      <div className="br2 b--light-gray shadow-2 bg-white">
+    <article className="w-100 w-50-ns mt0 pt0 pb1 ph2 animated fadeIn">
+      <div className="br2 b--light-gray shadow-1 bg-white">
         <VenueHeader name={props.name} />
         <Link to={`/venues/${props.id}`}>
           <CloudinaryImage
@@ -25,9 +25,9 @@ const VenuePreview = (props) => {
           />
         </Link>
         <div className="ph3 pb3">
-          <h3 className="f5 fw3 lh-copy mb1">{props.address}</h3>
-          <h3 className="f5 fw3 lh-copy mt0">Hours Today: {hoursToday(props.hours, today)}</h3>
-          <div className="tr">
+          <h3 className="f5 fw4 lh-copy mb1">{props.address}</h3>
+          <h3 className="f5 fw4 lh-copy mt0">Hours Today: {hoursToday(props.hours, today)}</h3>
+          <div className="flex flex-wrap items-center">
             {props.tags.map(tag => (<Tag key={tag} name={tag} />))}
           </div>
         </div>
