@@ -1,29 +1,27 @@
-import React, { Component } from 'react';
+import React, { PropTypes as PT } from 'react';
 import VenuePreview from './VenuePreview';
 
-export default class VenueList extends Component {
+const VenueList = (props) => (
+  <section className="venue-list flex flex-wrap pt5">
+    {props.venues.map(venue => (
+      <VenuePreview
+        address={venue.address.formatted_address}
+        hours={venue.hours}
+        id={venue.key}
+        location={venue.location}
+        key={venue.key}
+        name={venue.name}
+        userLocation={props.userLocation}
+        tags={venue.tags}
+        thumbnail={venue.media && venue.media.widescreen}
+      />
+    ))}
+  </section>
+);
 
-  render() {
-    const venues = this.props.venues
-    const venueIds = Object.keys(venues)
+VenueList.propTypes = {
+  venues: PT.arrayOf(PT.object).isRequired,
+  userLocation: PT.any,
+};
 
-    return (
-      <div>
-        <section className="pt5 flex flex-wrap">
-          {venueIds.map((name, index) => (
-            <VenuePreview
-              abbreviation={venues[name].abbreviation}
-              address={venues[name].address.formatted_address}
-              hours={venues[name].hours}
-              id={name}
-              key={name}
-              name={venues[name].name}
-              tags={venues[name].tags}
-              thumbnail={venues[name].media && venues[name].media.widescreen}
-            />
-          ))}
-        </section>
-      </div>
-    );
-  }
-}
+export default VenueList;

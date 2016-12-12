@@ -12,9 +12,12 @@
   "dependencies": {
     "animate.css": "~3.5.2",
     "axios": "~0.14.0",
+    "classnames": "~2.2.5",
     "cloudinary": "~1.4.4",
+    "geolib": "^2.0.22",
+    "lodash": "~4.17.2",
     "moment": "~2.15.1",
-    "re-base": "^2.3.0",
+    "re-base": "~2.3.0",
     "react": "~15.3.1",
     "react-dom": "~15.3.1",
     "react-router": "~2.8.1",
