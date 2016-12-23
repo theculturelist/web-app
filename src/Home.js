@@ -26,47 +26,25 @@ export default class Home extends Component {
     this.addActiveFilter = this.addActiveFilter.bind(this)
     this.clearFilters = this.clearFilters.bind(this)
     this.filterByOpen = this.filterByOpen.bind(this)
-    this.getUserLocation = this.getUserLocation.bind(this)
     this.state = {
       venues: JSON.parse(sessionStorage.getItem('venues')),
-      userLocation: false,
-      filters: []
+      userLocation: JSON.parse(sessionStorage.getItem('userLocation')),
+      filters: [],
     }
   }
 
-  addActiveFilter(term) {
-    this.setState({ filters: _.concat(this.state.filters, term) })
-  }
+  addActiveFilter(term) { this.setState({ filters: _.concat(this.state.filters, term) }) }
 
-  clearFilters() {
-    this.setState({ venues: this.allVenues, filters: [] })
-  }
+  clearFilters() { this.setState({ venues: this.allVenues, filters: [] }) }
 
   filterByOpen(state) {
-    this.setState({
-      venues: _.filter(state, el => ( hoursToday(el.hours) !== 'Closed' ))
-    })
+    this.setState({ venues: _.filter(state, el => ( hoursToday(el.hours) !== 'Closed' )) })
     this.addActiveFilter('open')
   }
 
   filterByTags(state, term) {
-    this.setState({
-      venues: _.filter(state, el => ( _.includes(el.tags, _.capitalize(term)) ))
-    })
+    this.setState({ venues: _.filter(state, el => ( _.includes(el.tags, _.capitalize(term)))) })
     this.addActiveFilter(term)
-  }
-
-  getUserLocation() {
-    if (navigator.geolocation && !sessionStorage.getItem('userLocation')) {
-      navigator.geolocation.getCurrentPosition((pos) => {
-        const location = { latitude: pos.coords.latitude, longitude: pos.coords.longitude }
-        this.setState({ userLocation: location })
-      })
-    }
-  }
-
-  componentDidMount() {
-    this.getUserLocation()
   }
 
   render() {
@@ -75,7 +53,7 @@ export default class Home extends Component {
         <nav className="bg-near-white db-l dn fixed fl mt5 overflow-y-scroll vh-100 w-20-l shadow-1">
           <section className="blue overflow-x-hidden">
             <header className="bg-blue white mb0 pv2 flex items-center justify-between ph2">
-              <h2 className="f5">Filters:</h2>
+              <h2 className="f4">Filters</h2>
               <Button
                 color={'white'}
                 textColor={'blue'}
