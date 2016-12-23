@@ -17,8 +17,8 @@ export default class Venue extends Component {
     })
   }
 
-  renderSpecialHours(hours) {
-    return hours ? <li className="ph0 pv1 i">Special Hours: {hours}</li> : null
+  renderClosedOn(hours) {
+    return hours ? <li className="ph0 pv1 i">Closed On: {hours}</li> : null
   }
 
   render() {
@@ -57,7 +57,7 @@ export default class Venue extends Component {
                 <li className="ph0 pv1">Wednesday: {venue.hours.wednesday}</li>
                 <li className="ph0 pv1">Thursday: {venue.hours.thursday}</li>
                 <li className="ph0 pv1">Friday: {venue.hours.friday}</li>
-                {this.renderSpecialHours(venue.hours.closed_on)}
+                {this.renderClosedOn(venue.hours.closed_on)}
               </ul>
 
               <h4 className="f5 f4-ns mb1">Phone Number:</h4>
