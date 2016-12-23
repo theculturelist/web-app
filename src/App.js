@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Router, Route, hashHistory } from 'react-router';
-import ReactSpinner from 'react-spinjs';
 import Navigation from './Layouts/Navigation';
 import Home from './Home';
+import InitScreen from './InitScreen';
 import Venue from './Venue';
 import base from './Base';
 
@@ -59,7 +59,7 @@ class App extends Component {
             <Route path="/venues/:id" component={Venue} />
           </Route>
         </Router>
-      : <ReactSpinner />
+      : <InitScreen />
     )
   }
 }

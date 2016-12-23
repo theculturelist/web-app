@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 import hoursToday from './utilities'
-import ToggleSwitch from './ToggleSwitch'
 import ToggleButton from './ToggleButton'
 import Button from './Button'
 import VenueList from './VenueList'
