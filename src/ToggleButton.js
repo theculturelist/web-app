@@ -5,7 +5,7 @@ const ToggleButton = (props) => (
   <button
     style={{ animationDuration: '0.2s' }}
     className={cn(`${props.textColor}
-      animated bn br-pill dib f6 link mb2 mh1 outline-0 ph3 pointer pv2 ttc white`,
+      animated bn br-pill dib f6 link outline-0 ph3 pointer pv2 ttc white`,
       {
         [`bg-${props.toggledColor} pulse`]: props.isToggled,
         [`bg-${props.untoggledColor}`]: !props.isToggled,

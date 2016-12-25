@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Router, Route, hashHistory } from 'react-router';
-import Navigation from './Layouts/Navigation';
 import Home from './Home';
 import InitScreen from './InitScreen';
 import Venue from './Venue';
@@ -54,7 +53,7 @@ class App extends Component {
     return (
       this.state.venuesLoaded && this.state.locationLoaded ?
         <Router history={hashHistory}>
-          <Route component={Navigation}>
+          <Route>
             <Route path="/" component={Home} />
             <Route path="/venues/:id" component={Venue} />
           </Route>

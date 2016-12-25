@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
+import NavBar from './NavBar'
+import LeftMenu from './LeftMenu'
 import hoursToday from './utilities'
 import ToggleButton from './ToggleButton'
-import Button from './Button'
+import ToggleSwitch from './ToggleSwitch'
 import VenueList from './VenueList'
 const tags = _.sortBy([
   'free',
@@ -21,75 +23,70 @@ const tags = _.sortBy([
 export default class Home extends Component {
   constructor(props) {
     super(props)
-    this.allVenues = JSON.parse(sessionStorage.getItem('venues'))
     this.addActiveFilter = this.addActiveFilter.bind(this)
+    this.allVenues = JSON.parse(sessionStorage.getItem('venues'))
     this.clearFilters = this.clearFilters.bind(this)
     this.filterByOpen = this.filterByOpen.bind(this)
+    this.filterByTag = this.filterByTag.bind(this)
+    this.toggleMenu = this.toggleMenu.bind(this)
     this.state = {
-      venues: JSON.parse(sessionStorage.getItem('venues')),
-      userLocation: JSON.parse(sessionStorage.getItem('userLocation')),
+      activeFilters: [],
+      filterBarToggled: false,
       filters: [],
+      userLocation: JSON.parse(sessionStorage.getItem('userLocation')),
+      venues: JSON.parse(sessionStorage.getItem('venues')),
     }
   }
 
-  addActiveFilter(term) { this.setState({ filters: _.concat(this.state.filters, term) }) }
+  addActiveFilter(term) {  this.setState({ activeFilters: _.concat(this.state.activeFilters, term) })  }
 
-  clearFilters() { this.setState({ venues: this.allVenues, filters: [] }) }
+  clearFilters() {  this.setState({ venues: this.allVenues, activeFilters: [] })  }
 
   filterByOpen(state) {
     this.setState({ venues: _.filter(state, el => ( hoursToday(el.hours) !== 'Closed' )) })
     this.addActiveFilter('open')
   }
 
-  filterByTags(state, term) {
+  filterByTag(state, term) {
     this.setState({ venues: _.filter(state, el => ( _.includes(el.tags, _.capitalize(term)))) })
     this.addActiveFilter(term)
   }
 
+  toggleMenu() {
+    return this.state.filterBarToggled ?
+    this.setState({ filterBarToggled: false }) : this.setState({ filterBarToggled: true})
+  }
+
   render() {
     return (
-      <div className="home">
-        <nav className="bg-near-white db-l dn fixed fl mt5 overflow-y-scroll vh-100 w-20-l shadow-1">
-          <section className="blue overflow-x-hidden">
-            <header className="bg-blue white mb0 pv2 flex items-center justify-between ph2">
-              <h2 className="f4">Filters</h2>
-              <Button
-                color={'white'}
-                textColor={'blue'}
-                name={'Clear All'}
-                clickFunction={this.clearFilters}
-              />
-            </header>
+      <div className='home'>
+        <NavBar>
+          <ToggleSwitch
+            click={this.toggleMenu}
+            isToggled={this.state.filterBarToggled}
+          />
+        </NavBar>
 
-            <h6 className="f6 fw1 pb2 ph2 mv2">Suggestion: Click the two that are most interesting to you</h6>
-
-            <div className="filter-toggles flex flex-wrap flex-auto items-center">
+        <LeftMenu
+          activeFilters={this.state.activeFilters}
+          clearFilters={this.clearFilters}
+          filterByOpen={()=> {this.filterByOpen(this.state.venues)}}
+          isToggled={this.state.filterBarToggled}
+        >
+          {tags.map(tag => (
+            <div className="ml1 mb1" key={tag}>
               <ToggleButton
-                click={()=> {this.filterByOpen(this.state.venues)}}
-                isToggled={ _.includes(this.state.filters, 'nearby')}
+                click={() => { this.filterByTag(this.state.venues, tag) }}
+                isToggled={ _.includes(this.state.activeFilters, tag) }
               >
-                Nearest To Me
+                {tag}
               </ToggleButton>
-              <ToggleButton
-                click={()=> {this.filterByOpen(this.state.venues)}}
-                isToggled={ _.includes(this.state.filters, 'open')}
-              >
-                Open Today
-              </ToggleButton>
-              {tags.map(tag => (
-                <ToggleButton
-                  click={() => { this.filterByTags(this.state.venues, tag) }}
-                  isToggled={ _.includes(this.state.filters, tag) }
-                  key={tag}
-                >
-                  {tag}
-                </ToggleButton>
-              ))}
             </div>
-          </section>
-        </nav>
+          ))}
+        </LeftMenu>
 
-        <div className="fr w-80-l">
+
+        <div className='fr w-80-l'>
           {this.state.venues ? <VenueList userLocation={this.state.userLocation} venues={this.state.venues} /> : null}
         </div>
       </div>

@@ -12,16 +12,15 @@ const Button = (props) => (
 );
 
 Button.propTypes = {
-  clickFunction: PT.func.isRequired,
+  clickFunction: PT.func,
   color: PT.string,
-  isToggled: PT.bool,
   name: PT.string.isRequired,
   textColor: PT.string,
 };
 
 Button.defaultProps = {
-  isToggled: false,
-  clickFunction() { console.warn('No Function Assigned')},
+  color: 'blue',
+  textColor: 'white'
 };
 
 export default Button;

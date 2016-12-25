@@ -7,6 +7,7 @@ cloudinary.config(
     cloud_name: config.cloudinary.cloud,
     api_key: config.cloudinary.api,
     api_secret: config.cloudinary.secret,
+    secure: true,
   }
 )
 

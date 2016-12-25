@@ -1,4 +1,4 @@
-import React, { PropTypes as PT } from 'react';
+import React, { PropTypes } from 'react';
 import cn from 'classnames';
 //TODO: write animation speed override classes, e.g anim-speed-06s
 
@@ -6,39 +6,49 @@ const ToggleSwitch = (props) => {
   return (
     <div className='toggle-switch relative w3'>
       <button
-        style={{ animationDuration: '0.5s' }}
+        style={{ animationDuration: '0.3s' }}
         className={cn(`absolute animated b--light-silver ba bg-near-white br-pill bw1 flex h2
         items-center justify-center light-silver outline-0 pointer shadow-1 w2 z-1`,
         {
-          'right-0 slideInLeft': props.isOn,
-          'left-0 slideInRight': !props.isOn,
+          'right-0 slideInLeft': props.isToggled,
+          'left-0 slideInRight': !props.isToggled,
         })}
-        onClick={props.toggleFunction}
+        onClick={props.click}
       >
-        <span className='f6 ma0 pa0'>|||</span>
       </button>
       <div
-        className={cn('animated br-pill db f6 flex items-center h2 justify-between white',
+        className={cn('animated b--white ba br-pill db f6 flex items-center h2 justify-between white',
         {
-          'bg-blue': props.isOn,
-          'bg-gray': !props.isOn
+          [`bg-${props.onColor}`]: props.isToggled,
+          [`bg-${props.offColor}`]: !props.isToggled
         })}
       >
-        <span className='f6 pl2 sans-serif ttu'>On</span>
-        <span className='f6 pr1 sans-serif ttu'>Off</span>
+        { props.textDisplayed ?
+          <div>
+            <span className='f6 fw1 pl2 sans-serif ttu'>On</span>
+            <span className='f6 fw1 pl1 sans-serif ttu'>Off</span>
+          </div>
+          : null
+        }
       </div>
     </div>
   );
 }
 
 ToggleSwitch.propTypes = {
-  isOn: PT.bool,
-  toggleFunction: PT.func.isRequired
+  click: PropTypes.func.isRequired,
+  isToggled: PropTypes.bool,
+  onColor: PropTypes.string,
+  offColor: PropTypes.string,
+  textDisplayed: PropTypes.bool
 };
 
 ToggleSwitch.defaultProps = {
-  inOn: false,
-  toggleFunction() { console.warn('No Function Assigned')},
+  click() { console.warn('No Function Assigned')},
+  isToggled: false,
+  offColor: 'gray',
+  onColor: 'blue',
+  textDisplayed: false,
 };
 
 export default ToggleSwitch;
