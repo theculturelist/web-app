@@ -18,6 +18,7 @@ const tags = _.sortBy([
   'architecture',
   'family',
   'unique',
+  'mechanical',
 ])
 
 export default class Home extends Component {
