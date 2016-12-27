@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
-import { Router, Route, hashHistory } from 'react-router';
-import Home from './Home';
-import InitScreen from './InitScreen';
-import Venue from './Venue';
-import base from './Base';
+import React, { Component } from 'react'
+import { Router, Route, hashHistory } from 'react-router'
+import PromisedLocation from 'promised-location'
+import Home from './Home'
+import InitScreen from './InitScreen'
+import Venue from './Venue'
+import base from './Base'
 
 class App extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       venuesLoaded: false,
       locationLoaded: false,
@@ -20,31 +21,41 @@ class App extends Component {
     this.getUserLocation()
 
     if (sessionStorage.getItem('venues')) {
-      this.setState({venuesLoaded: true });
+      this.setState({venuesLoaded: true })
     } else {
       base.fetch('venues', {
         context: this,
         asArray: true
       })
       .then(data => {
-        sessionStorage.setItem('venues', JSON.stringify(data));
-        this.setState({venuesLoaded: true });
+        sessionStorage.setItem('venues', JSON.stringify(data))
+        this.setState({venuesLoaded: true })
       })
       .catch(error => {
-        console.log(error);
+        console.log(error)
       })
     }
   }
 
   getUserLocation() {
-    if (navigator.geolocation && !sessionStorage.getItem('userLocation')) {
-      navigator.geolocation.getCurrentPosition((pos) => {
-        const location = { latitude: pos.coords.latitude, longitude: pos.coords.longitude }
-        sessionStorage.setItem('userLocation', JSON.stringify(location))
-        this.setState({ locationLoaded: true })
-      })
-    } else if (sessionStorage.getItem('userLocation')) {
-      this.setState({ locationLoaded: true })
+    const locator = new PromisedLocation()
+    if (!sessionStorage.getItem('userLocation')) {
+      locator
+        .then(position => {
+          const location = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          }
+          sessionStorage.setItem('userLocation', JSON.stringify(location))
+        })
+        .then(() => {
+          this.setState({locationLoaded: true })
+        })
+        .catch(err => {
+          console.error('Position Error ', err.toString())
+        })
+    } else {
+      this.setState({locationLoaded: true })
     }
   }
 
@@ -63,4 +74,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App
