@@ -16,15 +16,15 @@ const metersToMiles = (meters) => (  (meters * 0.000621371192).toFixed(2) )
 
 const VenuePreview = (props) => (
   <article className="venue-preview animated fadeIn ph2 pl3-l pv3 w-100 w-50-m w-third-l">
-    <div className="b--light-silver ba bg-white br2">
-      <VenueHeader name={props.name} />
-      <Link to={`/venues/${props.id}`}>
+    <div className="b--light-silver ba bg-white br2 overflow-hidden">
+      <Link to={`/venues/${props.id}`} className="link">
         <CloudinaryImage
-          className="b--light-gray bb bt dim pointer w-100"
+          className="b--light-gray bb dim pointer w-100"
           src={props.thumbnail}
           alt={props.name}
           transform={{quality: 'auto'}}
         />
+        <VenueHeader name={props.name} />
       </Link>
       <div className="pb3 ph2">
         <h2 className="f5 fw4 lh-copy mb1">
