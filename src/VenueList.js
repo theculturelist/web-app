@@ -5,7 +5,7 @@ const VenueList = (props) => (
   <section className="venue-list flex flex-wrap pt5">
     {props.venues.map(venue => (
       <VenuePreview
-        address={venue.address.formatted_address}
+        city={venue.address.city}
         hours={venue.hours}
         id={venue.key}
         location={venue.location}

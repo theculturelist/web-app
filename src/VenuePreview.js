@@ -26,16 +26,13 @@ const VenuePreview = (props) => (
         />
         <VenueHeader name={props.name} />
       </Link>
-      <div className="pb3 ph2">
-        <h2 className="f5 fw4 lh-copy mb1">
-          {props.address}
-        </h2>
+      <div className="pb2 ph2">
         <h3 className="f5 fw4 lh-copy mt0 mb1">
           <span className="b">Hours Today:</span> {hoursToday(props.hours)}
         </h3>
-        <h3 className="f5 fw4 i lh-copy mt0">
+        <h3 className="f5 fw4 lh-copy mt0">
          {props.userLocation ?
-           `${metersToMiles(metersAway(props.userLocation, props.location))} Miles Away`
+           `${metersToMiles(metersAway(props.userLocation, props.location))} Miles Away in ${props.city}`
            : 'Loading Distance...'}
         </h3>
         <div className="flex flex-wrap items-center">
@@ -47,7 +44,7 @@ const VenuePreview = (props) => (
 )
 
 VenuePreview.propTypes = {
-  address: PT.string.isRequired,
+  city: PT.string,
   hours: PT.object.isRequired,
   id: PT.string.isRequired,
   location: PT.object,

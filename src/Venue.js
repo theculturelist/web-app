@@ -30,7 +30,7 @@ export default class Venue extends Component {
       venue ?
         <article>
           <NavBar />
-          <div className="pt5 animated slideInDown">
+          <div className="pt5 animated slideInUp">
             <CloudinaryImage
               alt='Venue Main Image'
               className='w-100 mb0 pb0'
