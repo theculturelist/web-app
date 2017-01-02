@@ -4,7 +4,7 @@ import cn from 'classnames';
 const Button = (props) => (
   <button
     className={cn(`bg-${props.color} ${props.textColor}
-    bn br-pill dib link ph3 pointer outline-0 pv2 ttc`)}
+    bn br-pill dib f6 flex items-center link ph3 pointer outline-0 pv2 ttc`)}
     onClick={props.clickFunction}
   >
     {props.name}

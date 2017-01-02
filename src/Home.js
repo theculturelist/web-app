@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
+import Icon from './Icon'
 import NavBar from './NavBar'
 import LeftMenu from './LeftMenu'
 import hoursToday from './utilities'
 import ToggleButton from './ToggleButton'
 import ToggleSwitch from './ToggleSwitch'
 import VenueList from './VenueList'
-const tags = _.sortBy([
+const tags = [
   'free',
   'art',
   'modern',
@@ -18,10 +19,10 @@ const tags = _.sortBy([
   'architecture',
   'family',
   'unique',
-  'mechanical',
-])
+  'mechanical'
+]
 
-export default class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super(props)
     this.addActiveFilter = this.addActiveFilter.bind(this)
@@ -75,12 +76,12 @@ export default class Home extends Component {
           isToggled={this.state.filterBarToggled}
         >
           {tags.map(tag => (
-            <div className="ml1 mb1" key={tag}>
+            <div className="mb2 mr2" key={tag}>
               <ToggleButton
                 click={() => { this.filterByTag(this.state.venues, tag) }}
                 isToggled={ _.includes(this.state.activeFilters, tag) }
               >
-                {tag}
+                <span className="pr1 lh-copy">{tag}</span> <Icon iconName={tag} />
               </ToggleButton>
             </div>
           ))}
@@ -94,3 +95,4 @@ export default class Home extends Component {
     )
   }
 }
+export default Home

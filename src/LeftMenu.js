@@ -1,6 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 import cn from 'classnames'
+import Icon from './Icon'
 import Button from './Button'
 import ToggleButton from './ToggleButton'
 
@@ -15,7 +16,7 @@ const LeftMenu = props => (
     })}
   >
     <section className='blue overflow-x-hidden'>
-      <header className={`bg-blue white mb0 pv2 flex items-center justify-between ph2`}>
+      <header className={`bg-blue white flex items-center justify-between ph2`}>
         <h2 className='f4'>Filters</h2>
         <Button
           color={'white'}
@@ -24,20 +25,18 @@ const LeftMenu = props => (
           clickFunction={props.clearFilters}
         />
       </header>
-
-      <h6 className='f6 fw1 pb2 ph2 mv2'>Suggestion: Click the two that are most interesting to you</h6>
-
-      <div className='filter-toggles flex flex-wrap flex-auto items-center'>
-        <div className="ml1 mb1">
+      <div className='filter-toggles flex flex-wrap ph2 mt2'>
+        <div className="mb2 mr2">
           <ToggleButton
             click={props.filterByOpen}
             isToggled={ _.includes(props.activeFilters, 'open')}
           >
-            Open Today
+            <span className="pr1 lh-copy">Open Today</span> <Icon iconName={'open'} />
           </ToggleButton>
         </div>
         {props.children}
       </div>
+      <h6 className='f6 fw1 pb2 ph2 mv2'>Suggestion: Click the two that are most interesting to you</h6>
     </section>
   </nav>
 )
