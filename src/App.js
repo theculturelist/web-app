@@ -53,6 +53,7 @@ class App extends Component {
         })
         .catch(err => {
           console.error('Position Error ', err.toString())
+          this.setState({locationLoaded: true })
         })
     } else {
       this.setState({locationLoaded: true })
