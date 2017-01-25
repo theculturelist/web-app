@@ -4,7 +4,7 @@ import CloudinaryImage from './CloudinaryImage'
 
 const NavBar = props => (
   <div className='nav-bar'>
-    <header className='bg-dark-gray fixed h3 shadow-1 w-100 z-2 flex items-center ph2'>
+    <header className='bg-dark-gray-gradient fixed h3 shadow-1 w-100 z-2 flex items-center ph2'>
       <div className='absolute w-100 flex h3 items-center justify-center top-0'>
         <Link to='/'>
           <CloudinaryImage

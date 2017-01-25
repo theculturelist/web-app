@@ -3,9 +3,9 @@ import cn from 'classnames';
 
 const ToggleButton = (props) => (
   <button
-    style={{ animationDuration: '0.2s' }}
     className={cn(`${props.textColor}
-      toggle-button animated bn br-pill dib f6 flex items-center link outline-0 ph3 pointer pv2 ttc white`,
+      toggle-button animated anim-duration-03 bn br-pill dib f6 flex items-center link outline-0 ph3
+      pointer pv2 ttc white`,
       {
         [`bg-${props.toggledColor} pulse`]: props.isToggled,
         [`bg-${props.untoggledColor}`]: !props.isToggled,

@@ -7,8 +7,7 @@ import ToggleButton from './ToggleButton'
 
 const LeftMenu = props => (
   <nav
-    style={{animationDuration: '0.3s'}}
-    className={cn(`animated bg-near-white db-l fixed fl mt5 shadow-1 vh-100 w-80 w-40-m w-20-l z-1`,
+    className={cn(`animated anim-duration-05 bg-near-white db-l fixed fl mt5 shadow-1 vh-100 w-80 w-40-m w-20-l z-1`,
     {
       "slideInLeft": props.isToggled,
       "dn": !props.isToggled,

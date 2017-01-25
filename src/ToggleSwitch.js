@@ -6,9 +6,8 @@ const ToggleSwitch = (props) => {
   return (
     <div className='toggle-switch relative w3'>
       <button
-        style={{ animationDuration: '0.3s' }}
-        className={cn(`absolute animated b--light-silver ba bg-near-white br-100 bw1 flex h2
-        items-center justify-center light-silver outline-0 pointer shadow-1 w2 z-1`,
+        className={cn(`absolute animated anim-duration-03 b--light-silver ba bg-near-white br-100
+        bw1 flex h2 items-center justify-center light-silver outline-0 pointer shadow-1 w2 z-1`,
         {
           'right-0 slideInLeft': props.isToggled,
           'left-0 slideInRight': !props.isToggled,
