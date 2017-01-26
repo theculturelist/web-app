@@ -1,5 +1,5 @@
 {
-  "http-only": true,
+  "http_only": true,
   "root": "build/",
   "clean_urls": false,
   "routes": {
