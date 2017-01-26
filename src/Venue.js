@@ -39,7 +39,7 @@ export default class Venue extends Component {
             />
 
             <section className="ph3 dark-gray">
-              <VenueHeader name={venue.name} abbreviation={venue.abbreviation} />
+              <VenueHeader name={venue.name} />
 
               <div className="bb b--dark-gray" />
               <div className="w-100 w-50-m w-60-l pr3-ns fl">
@@ -66,7 +66,7 @@ export default class Venue extends Component {
                 </ul>
 
                 <h4 className="f5 f4-ns mb1">Phone Number:</h4>
-                <p className="mt0 pt0 pb3">{venue.phone.main}</p>
+                <p className="mt0 pt0 pb3">{venue.phone}</p>
               </div>
             </section>
           </div>

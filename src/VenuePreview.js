@@ -1,4 +1,5 @@
 import React, { PropTypes as PT} from 'react'
+import { map } from 'lodash'
 import { Link } from 'react-router'
 import geolib from 'geolib'
 import hoursToday from './utilities'
@@ -21,10 +22,13 @@ const VenuePreview = (props) => (
         <CloudinaryImage
           className="b--light-gray bb dim pointer w-100"
           src={props.thumbnail}
-          alt={props.name}
+          alt={props.name.full}
           transform={{quality: 'auto'}}
         />
-        <VenueHeader name={props.name} />
+        <VenueHeader
+          name={props.name}
+          size={'f3'}
+         />
       </Link>
       <div className="pb2 ph2">
         <h3 className="f5 fw4 lh-copy mt0 mb1">
@@ -36,7 +40,7 @@ const VenuePreview = (props) => (
            : 'Loading Distance...'}
         </h3>
         <div className="flex flex-wrap items-center">
-          {props.tags.map(t => (<Tag key={t} name={t} />))}
+          { map(Object.keys(props.tags), t => (<Tag key={t} name={t} />)) }
         </div>
       </div>
     </div>
@@ -48,8 +52,8 @@ VenuePreview.propTypes = {
   hours: PT.object.isRequired,
   id: PT.string.isRequired,
   location: PT.object,
-  name: PT.string.isRequired,
-  tags: PT.array,
+  name: PT.object.isRequired,
+  tags: PT.object,
   thumbnail: PT.string.isRequired,
   userLocation: PT.any,
 }
