@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactSpinner from 'react-spinjs'
-import _ from 'lodash'
+import { random } from 'lodash'
 import CloudinaryImage from './CloudinaryImage'
 
 const Messages = [
@@ -21,7 +21,7 @@ const InitScreen = (props) => (
       transform={{quality: 'auto'}}
     />
     <ReactSpinner width={100} height={100} color="white" />
-    <h1 className="f3 f2-l fw1 pv4 tc">{ Messages[_.random(Messages.length - 1)] }...</h1>
+    <h1 className="f3 f2-l fw1 pv4 tc">{ Messages[random(Messages.length - 1)] }...</h1>
     <h2 className="f5 f4-l fw1 pv4 tc">{'To give you the best experience.'}</h2>
   </section>
 )

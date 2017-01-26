@@ -299,9 +299,9 @@
       "resolved": "https://registry.npmjs.org/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz"
     },
     "tachyons": {
-      "version": "4.4.3",
-      "from": "tachyons@>=4.4.2 <4.5.0",
-      "resolved": "https://registry.npmjs.org/tachyons/-/tachyons-4.4.3.tgz"
+      "version": "4.6.1",
+      "from": "tachyons@4.6.1",
+      "resolved": "https://registry.npmjs.org/tachyons/-/tachyons-4.6.1.tgz"
     },
     "ua-parser-js": {
       "version": "0.7.12",

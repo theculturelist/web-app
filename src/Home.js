@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import _ from 'lodash'
+import { capitalize, concat, filter, includes } from 'lodash'
 import Icon from './Icon'
 import NavBar from './NavBar'
 import LeftMenu from './LeftMenu'
@@ -40,17 +40,17 @@ class Home extends Component {
     }
   }
 
-  addActiveFilter(term) {  this.setState({ activeFilters: _.concat(this.state.activeFilters, term) })  }
+  addActiveFilter(term) {  this.setState({ activeFilters: concat(this.state.activeFilters, term) })  }
 
   clearFilters() {  this.setState({ venues: this.allVenues, activeFilters: [] })  }
 
   filterByOpen(state) {
-    this.setState({ venues: _.filter(state, el => ( hoursToday(el.hours) !== 'Closed' )) })
+    this.setState({ venues: filter(state, el => ( hoursToday(el.hours) !== 'Closed' )) })
     this.addActiveFilter('open')
   }
 
   filterByTag(state, term) {
-    this.setState({ venues: _.filter(state, el => ( _.includes(el.tags, _.capitalize(term)))) })
+    this.setState({ venues: filter(state, el => ( includes(Object.keys(el.tags), capitalize(term)))) })
     this.addActiveFilter(term)
   }
 
@@ -79,7 +79,7 @@ class Home extends Component {
             <div className="mb2 mr2" key={tag}>
               <ToggleButton
                 click={() => { this.filterByTag(this.state.venues, tag) }}
-                isToggled={ _.includes(this.state.activeFilters, tag) }
+                isToggled={ includes(this.state.activeFilters, tag) }
               >
                 <span className="pr1 lh-copy">{tag}</span> <Icon iconName={tag} />
               </ToggleButton>

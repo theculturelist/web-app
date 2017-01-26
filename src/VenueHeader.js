@@ -1,4 +1,4 @@
-import React, { PropTypes as PT} from 'react';
+import React, { PropTypes } from 'react';
 
 const renderAbbreviation = (abbr) => (abbr ? `(${abbr})` : null)
 const renderThe = (proper) => (proper ? 'The' : null)
@@ -12,11 +12,12 @@ const VenueHeader = (props) => (
 )
 
 VenueHeader.propTypes = {
-  name: PT.object.isRequired,
+  name: PropTypes.object.isRequired,
 }
 
 VenueHeader.defaultProps = {
   name: 'Coming Soon',
+  size: 'f4'
 }
 
 export default VenueHeader;

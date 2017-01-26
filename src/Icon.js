@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import _ from 'lodash'
+import { has, map } from 'lodash'
 
 const iconSet = {
   "architecture": [
@@ -54,11 +54,16 @@ const iconSet = {
   ],
 }
 
-const checkInSet = (set, term) => ( _.has(set, term) ? term : [] )
+const checkInSet = (set, term) => ( has(set, term) ? term : [] )
 
 const Icon = props => (
-  <svg width={props.size} height={props.size} viewBox="0 0 1024 1024" style={{fill: 'currentColor'}}>
-    { iconSet[checkInSet(iconSet, props.iconName)].map(svgPath => (
+  <svg
+    height={props.size}
+    style={{fill: 'currentColor'}}
+    viewBox="0 0 1024 1024"
+    width={props.size}
+  >
+    { map(iconSet[checkInSet(iconSet, props.iconName)], svgPath => (
       <path key={Math.random()} d={svgPath}></path>
     ))}
   </svg>

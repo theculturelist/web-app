@@ -1,5 +1,5 @@
 import React from 'react'
-import _ from 'lodash'
+import { includes } from 'lodash'
 import cn from 'classnames'
 import Icon from './Icon'
 import Button from './Button'
@@ -27,7 +27,7 @@ const LeftMenu = props => (
         <div className="mb2 mr2">
           <ToggleButton
             click={props.filterByOpen}
-            isToggled={ _.includes(props.activeFilters, 'open')}
+            isToggled={ includes(props.activeFilters, 'open')}
           >
             <span className="pr1 lh-copy">Open Today</span> <Icon iconName={'open'} />
           </ToggleButton>
