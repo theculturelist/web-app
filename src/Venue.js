@@ -38,7 +38,7 @@ class Venue extends Component {
       this.state.loaded ?
         <article style={{
           background:
-          `url(http://res.cloudinary.com/theculturelist/image/upload/e_blur:200/q_auto/${venue.media.widescreen}) no-repeat center center fixed`,
+          `url(https://res.cloudinary.com/theculturelist/image/upload/e_blur:200/q_auto/${venue.media.widescreen}) no-repeat center center fixed`,
           backgroundSize: 'cover'}}>
           <NavBar />
           <div className="pt5 pt6-ns vh-100">
