@@ -4,7 +4,7 @@ import cn from 'classnames';
 const ToggleButton = (props) => (
   <button
     className={cn(`${props.textColor}
-      toggle-button animated anim-duration-03 bn br-pill dib f6 flex items-center link outline-0 ph3
+      toggle-button animated anim-duration-03 bn br-pill f6 flex items-center link outline-0 ph3
       pointer pv2 ttc white`,
       {
         [`bg-${props.toggledColor} pulse`]: props.isToggled,

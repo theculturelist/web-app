@@ -1,8 +1,8 @@
-import React, { PropTypes as PT } from 'react';
+import React, { PropTypes } from 'react';
 import VenuePreview from './VenuePreview';
 
 const VenueList = (props) => (
-  <section className="venue-list flex flex-wrap pt5">
+  <div className="venue-list flex flex-wrap pt5">
     {props.venues.map(venue => (
       <VenuePreview
         city={venue.address.city}
@@ -11,17 +11,16 @@ const VenueList = (props) => (
         location={venue.location}
         key={venue.key}
         name={venue.name}
-        userLocation={props.userLocation}
+        distance={venue.distance}
         tags={venue.tags}
         thumbnail={venue.media && venue.media.widescreen}
       />
     ))}
-  </section>
+  </div>
 );
 
 VenueList.propTypes = {
-  venues: PT.arrayOf(PT.object).isRequired,
-  userLocation: PT.any,
+  venues: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default VenueList;

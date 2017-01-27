@@ -1,19 +1,10 @@
 import React, { PropTypes as PT} from 'react'
 import { map } from 'lodash'
 import { Link } from 'react-router'
-import geolib from 'geolib'
-import hoursToday from './utilities'
+import { hoursToday } from './utilities'
 import VenueHeader from './VenueHeader'
 import Tag from './Tag'
 import CloudinaryImage from './CloudinaryImage'
-
-const metersAway = (userLoc, venueLoc) => {
-  //FIXME: Fix the data on our end to return latitude and longitude
-  const fixedLoc = { latitude: venueLoc.lat, longitude: venueLoc.lng }
-  return geolib.getDistanceSimple(userLoc, fixedLoc)
-}
-
-const metersToMiles = (meters) => (  (meters * 0.000621371192).toFixed(2) )
 
 const VenuePreview = (props) => (
   <article className="venue-preview animated fadeIn ph2 pl3-l pv3 w-100 w-50-m w-third-l">
@@ -35,9 +26,7 @@ const VenuePreview = (props) => (
           <span className="b">Hours Today:</span> {hoursToday(props.hours)}
         </h3>
         <h3 className="f5 fw4 lh-copy mt0">
-         {props.userLocation ?
-           `${metersToMiles(metersAway(props.userLocation, props.location))} Miles Away in ${props.city}`
-           : 'Loading Distance...'}
+         {props.distance ? `${props.distance} Miles Away in ${props.city}` : null}
         </h3>
         <div className="flex flex-wrap items-center">
           { map(Object.keys(props.tags), t => (<Tag key={t} name={t} />)) }
@@ -55,7 +44,7 @@ VenuePreview.propTypes = {
   name: PT.object.isRequired,
   tags: PT.object,
   thumbnail: PT.string.isRequired,
-  userLocation: PT.any,
+  distance: PT.string,
 }
 
 VenuePreview.defaultProps = {

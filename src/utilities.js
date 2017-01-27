@@ -1,8 +1,15 @@
-import moment from 'moment';
+import moment from 'moment'
+import { getDistanceSimple } from 'geolib'
 
-const hoursToday = (hoursObject) => {
+export const hoursToday = (hoursObject) => {
   const today = moment().format("dddd").toLowerCase();
   return hoursObject.hasOwnProperty(today) ? hoursObject[today] : null
 }
 
-export default hoursToday
+export const metersAway = (userLoc, venueLoc) => {
+    //FIXME: Fix the data on our end to return latitude and longitude
+    const fixedLoc = { latitude: venueLoc.lat, longitude: venueLoc.lng }
+    return getDistanceSimple(userLoc, fixedLoc)
+  }
+
+export const metersToMiles = (meters) => ( (meters * 0.000621371192).toFixed(1) )

@@ -3,7 +3,7 @@ import ReactSpinner from 'react-spinjs'
 import NavBar from './NavBar'
 import VenueHeader from './VenueHeader'
 import RelatedVenues from './RelatedVenues'
-import base from './Base'
+import base from './config/Rebase'
 import CloudinaryImage from './CloudinaryImage'
 
 class Venue extends Component {

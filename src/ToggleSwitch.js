@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
-//TODO: write animation speed override classes, e.g anim-speed-06s
 
 const ToggleSwitch = (props) => {
   return (

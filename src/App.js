@@ -1,44 +1,49 @@
 import React, { Component } from 'react'
 import { Router, Route, hashHistory } from 'react-router'
 import PromisedLocation from 'promised-location'
+import { metersAway, metersToMiles } from './utilities'
 import Home from './Home'
 import InitScreen from './InitScreen'
 import Venue from './Venue'
-import base from './Base'
+import base from './config/Rebase'
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      venuesLoaded: false,
-      locationLoaded: false,
+      venuesLoaded: false
     }
-
-    this.getUserLocation = this.getUserLocation.bind(this)
   }
 
   componentDidMount() {
-    this.getUserLocation()
-
-    if (sessionStorage.getItem('venues')) {
-      this.setState({venuesLoaded: true })
-    } else {
-      base.fetch('venues', {
-        context: this,
-        asArray: true
-      })
-      .then(data => {
-        sessionStorage.setItem('venues', JSON.stringify(data))
+    this.getUserLocation().then((data) => {
+      if (sessionStorage.getItem('venues')) {
         this.setState({venuesLoaded: true })
-      })
-      .catch(error => {
-        console.log(error)
-      })
-    }
+      } else {
+        base.fetch('venues', {
+          context: this,
+          asArray: true
+        })
+        .then(data => {
+          const user_location = JSON.parse(sessionStorage.getItem('userLocation'))
+          const venue_data = data.map(venue => {
+            venue.distance = metersToMiles(metersAway(user_location, venue.location))
+            return venue
+          })
+
+          sessionStorage.setItem('venues', JSON.stringify(venue_data))
+          this.setState({venuesLoaded: true })
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
+    })
   }
 
-  getUserLocation() {
+  getUserLocation = () => {
     const locator = new PromisedLocation()
+
     if (!sessionStorage.getItem('userLocation')) {
       locator
         .then(position => {
@@ -48,22 +53,17 @@ class App extends Component {
           }
           sessionStorage.setItem('userLocation', JSON.stringify(location))
         })
-        .then(() => {
-          this.setState({locationLoaded: true })
-        })
         .catch(err => {
           console.error('Position Error ', err.toString())
-          this.setState({locationLoaded: true })
         })
-    } else {
-      this.setState({locationLoaded: true })
     }
-  }
 
+    return locator
+  }
 
   render() {
     return (
-      this.state.venuesLoaded && this.state.locationLoaded ?
+      this.state.venuesLoaded ?
         <Router history={hashHistory}>
           <Route>
             <Route path="/" component={Home} />

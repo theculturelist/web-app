@@ -1,96 +1,125 @@
 import React, { Component } from 'react'
-import { capitalize, concat, filter, includes } from 'lodash'
+import { capitalize, concat, filter, includes, sortBy } from 'lodash'
 import Icon from './Icon'
 import NavBar from './NavBar'
 import LeftMenu from './LeftMenu'
-import hoursToday from './utilities'
+import { hoursToday } from './utilities'
+import Button from './Button'
 import ToggleButton from './ToggleButton'
 import ToggleSwitch from './ToggleSwitch'
 import VenueList from './VenueList'
-const tags = [
-  'free',
-  'art',
-  'modern',
-  'cultural',
-  'design',
-  'science',
-  'history',
-  'gardens',
-  'architecture',
-  'family',
-  'unique',
-  'mechanical'
-]
 
 class Home extends Component {
   constructor(props) {
     super(props)
-    this.addActiveFilter = this.addActiveFilter.bind(this)
+    this.tags = [
+      'free',
+      'art',
+      'modern',
+      'cultural',
+      'design',
+      'science',
+      'history',
+      'gardens',
+      'architecture',
+      'family',
+      'unique',
+      'mechanical'
+    ]
     this.allVenues = JSON.parse(sessionStorage.getItem('venues'))
-    this.clearFilters = this.clearFilters.bind(this)
-    this.filterByOpen = this.filterByOpen.bind(this)
-    this.filterByTag = this.filterByTag.bind(this)
-    this.toggleMenu = this.toggleMenu.bind(this)
     this.state = {
       activeFilters: [],
-      filterBarToggled: false,
-      filters: [],
+      leftMenuToggled: false,
       userLocation: JSON.parse(sessionStorage.getItem('userLocation')),
       venues: JSON.parse(sessionStorage.getItem('venues')),
     }
   }
 
-  addActiveFilter(term) {  this.setState({ activeFilters: concat(this.state.activeFilters, term) })  }
-
-  clearFilters() {  this.setState({ venues: this.allVenues, activeFilters: [] })  }
-
-  filterByOpen(state) {
-    this.setState({ venues: filter(state, el => ( hoursToday(el.hours) !== 'Closed' )) })
-    this.addActiveFilter('open')
+  addActiveFilter = (term) => {
+    this.setState({ activeFilters: concat(this.state.activeFilters, term) })
   }
 
-  filterByTag(state, term) {
-    this.setState({ venues: filter(state, el => ( includes(Object.keys(el.tags), capitalize(term)))) })
+  clearFilters = () => {
+    this.setState({ venues: this.allVenues, activeFilters: [] })
+  }
+
+  sortNearby = (state, term) => {
+    this.setState({ venues: sortBy(state, ['distance']) })
     this.addActiveFilter(term)
   }
 
-  toggleMenu() {
-    return this.state.filterBarToggled ?
-    this.setState({ filterBarToggled: false }) : this.setState({ filterBarToggled: true})
+  filterByOpen = (state, term) => {
+    this.setState({ venues: filter(state, el => ( hoursToday(el.hours) !== 'Closed' )) })
+    this.addActiveFilter(term)
+  }
+
+  filterByTag = (state, term) => {
+    this.setState({
+      venues: filter(state, el => ( includes(Object.keys(el.tags), capitalize(term))))
+    })
+    this.addActiveFilter(term)
+  }
+
+  toggleLeftMenu = () => {
+    this.state.leftMenuToggled ?
+    this.setState({ leftMenuToggled: false }) : this.setState({ leftMenuToggled: true})
   }
 
   render() {
     return (
       <div className='home'>
         <NavBar>
-          <ToggleSwitch
-            click={this.toggleMenu}
-            isToggled={this.state.filterBarToggled}
-          />
+          <ToggleSwitch click={this.toggleLeftMenu} isToggled={this.state.leftMenuToggled} />
         </NavBar>
 
-        <LeftMenu
-          activeFilters={this.state.activeFilters}
-          clearFilters={this.clearFilters}
-          filterByOpen={()=> {this.filterByOpen(this.state.venues)}}
-          isToggled={this.state.filterBarToggled}
-        >
-          {tags.map(tag => (
-            <div className="mb2 mr2" key={tag}>
-              <ToggleButton
-                click={() => { this.filterByTag(this.state.venues, tag) }}
-                isToggled={ includes(this.state.activeFilters, tag) }
-              >
-                <span className="pr1 lh-copy">{tag}</span> <Icon iconName={tag} />
-              </ToggleButton>
+        <LeftMenu isToggled={this.state.leftMenuToggled}>
+          <section className='blue overflow-x-hidden'>
+            <header className='bg-blue white flex items-center justify-between ph2'>
+              <h2 className='f4'>Filters</h2>
+              <Button
+                color={'white'}
+                textColor={'blue'}
+                name={'Reset'}
+                clickFunction={this.clearFilters}
+              />
+            </header>
+            <div className='filter-toggles flex flex-wrap ph2 mt2'>
+              <div className="mb2 mr2">
+                <ToggleButton
+                  click={() => this.sortNearby(this.state.venues, 'distance')}
+                  isToggled={ includes(this.state.activeFilters, 'distance')}
+                >
+                  <div className="pr1">Nearby</div><Icon iconName={'nearby'} />
+                </ToggleButton>
+              </div>
+              <div className="mb2 mr2">
+                <ToggleButton
+                  click={() => { this.filterByOpen(this.state.venues, 'open') }}
+                  isToggled={ includes(this.state.activeFilters, 'open')}
+                >
+                  <div className="pr1">Open Today</div><Icon iconName={'open'} />
+                </ToggleButton>
+              </div>
+              {this.tags.map(tag => (
+                <div className="mb2 mr2" key={tag}>
+                  <ToggleButton
+                    click={() => { this.filterByTag(this.state.venues, tag) }}
+                    isToggled={ includes(this.state.activeFilters, tag) }
+                  >
+                    <div className="pr1">{tag}</div><Icon iconName={tag} />
+                  </ToggleButton>
+                </div>
+              ))}
             </div>
-          ))}
+            <h6 className='f6 fw1 pb2 ph2 mv2'>
+              Suggestion: Click the two that are most interesting to you
+            </h6>
+          </section>
         </LeftMenu>
 
-
-        <div className='fr w-80-l'>
-          {this.state.venues ? <VenueList userLocation={this.state.userLocation} venues={this.state.venues} /> : null}
-        </div>
+        <section className='fr w-80-l'>
+          {this.state.venues ? <VenueList venues={this.state.venues} /> : null}
+        </section>
       </div>
     )
   }

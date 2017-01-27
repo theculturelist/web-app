@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const renderAbbreviation = (abbr) => (abbr ? `(${abbr})` : null)
+
 const renderThe = (proper) => (proper ? 'The' : null)
 
 const VenueHeader = (props) => (

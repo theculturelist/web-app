@@ -1,6 +1,6 @@
-import React, { PropTypes as PT } from 'react';
+import React, { PropTypes } from 'react';
 import cloudinary from 'cloudinary';
-import config from './config';
+import config from './config/config';
 
 cloudinary.config(
   {
@@ -23,10 +23,10 @@ const CloudinaryImage = (props) => {
 }
 
 CloudinaryImage.propTypes = {
-  alt: PT.string.isRequired,
-  className: PT.string,
-  src: PT.string.isRequired,
-  transform: PT.object,
+  alt: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  src: PropTypes.string.isRequired,
+  transform: PropTypes.object,
 };
 
 CloudinaryImage.defaultProps = {

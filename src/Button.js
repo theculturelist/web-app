@@ -1,4 +1,4 @@
-import React, { PropTypes as PT } from 'react';
+import React, { PropTypes } from 'react';
 import cn from 'classnames';
 
 const Button = (props) => (
@@ -12,10 +12,10 @@ const Button = (props) => (
 );
 
 Button.propTypes = {
-  clickFunction: PT.func,
-  color: PT.string,
-  name: PT.string.isRequired,
-  textColor: PT.string,
+  clickFunction: PropTypes.func,
+  color: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  textColor: PropTypes.string,
 };
 
 Button.defaultProps = {

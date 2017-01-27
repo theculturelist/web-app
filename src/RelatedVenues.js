@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { map, concat } from 'lodash'
-import base from './Base'
+import base from './config/Rebase'
 import CloudinaryImage from './CloudinaryImage'
 
 class RelatedVenues extends Component {
