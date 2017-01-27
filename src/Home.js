@@ -4,6 +4,7 @@ import Icon from './Icon'
 import NavBar from './NavBar'
 import LeftMenu from './LeftMenu'
 import { hoursToday } from './utilities'
+import SearchBar from './SearchBar'
 import Button from './Button'
 import ToggleButton from './ToggleButton'
 import ToggleSwitch from './ToggleSwitch'
@@ -60,7 +61,12 @@ class Home extends Component {
     this.addActiveFilter(term)
   }
 
-  toggleLeftMenu = () => {
+  filterBySearch = (venues, query) => {
+    const regex = new RegExp(query, 'gi')
+    this.setState({ venues: filter(venues, venue => venue.name.full.match(regex)) })
+  }
+
+   toggleLeftMenu = () => {
     this.state.leftMenuToggled ?
     this.setState({ leftMenuToggled: false }) : this.setState({ leftMenuToggled: true})
   }
@@ -74,7 +80,7 @@ class Home extends Component {
 
         <LeftMenu isToggled={this.state.leftMenuToggled}>
           <section className='blue overflow-x-hidden'>
-            <header className='bg-blue white flex items-center justify-between ph2'>
+            <header className='bg-blue white flex items-center justify-between pv1 ph2'>
               <h2 className='f4'>Filters</h2>
               <Button
                 color={'white'}
@@ -118,6 +124,10 @@ class Home extends Component {
         </LeftMenu>
 
         <section className='fr w-80-l'>
+          <SearchBar
+            onFocus={this.clearFilters}
+            filterSearch={ (e) => this.filterBySearch(this.allVenues, e.target.value) }
+          />
           {this.state.venues ? <VenueList venues={this.state.venues} /> : null}
         </section>
       </div>
