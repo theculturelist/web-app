@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 import cloudinary from 'cloudinary';
-import config from './config/config';
+import env from './config/env';
 
 cloudinary.config(
   {
-    cloud_name: config.cloudinary.cloud,
-    api_key: config.cloudinary.api,
-    api_secret: config.cloudinary.secret,
+    cloud_name: env.cloudinary.cloud,
+    api_key: env.cloudinary.api,
+    api_secret: env.cloudinary.secret,
     secure: true,
   }
 )

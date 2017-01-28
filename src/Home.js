@@ -9,11 +9,10 @@ import Button from './Button'
 import ToggleButton from './ToggleButton'
 import ToggleSwitch from './ToggleSwitch'
 import VenueList from './VenueList'
+import Message from './Message'
 
 class Home extends Component {
-  constructor(props) {
-    super(props)
-    this.tags = [
+    tags = [
       'free',
       'art',
       'modern',
@@ -27,14 +26,13 @@ class Home extends Component {
       'unique',
       'mechanical'
     ]
-    this.allVenues = JSON.parse(sessionStorage.getItem('venues'))
-    this.state = {
+    allVenues = JSON.parse(sessionStorage.getItem('venues'))
+    state = {
       activeFilters: [],
       leftMenuToggled: false,
       userLocation: JSON.parse(sessionStorage.getItem('userLocation')),
       venues: JSON.parse(sessionStorage.getItem('venues')),
     }
-  }
 
   addActiveFilter = (term) => {
     this.setState({ activeFilters: concat(this.state.activeFilters, term) })
@@ -123,12 +121,17 @@ class Home extends Component {
           </section>
         </LeftMenu>
 
-        <section className='fr w-80-l'>
+        <section className='fr w-100 w-80-l'>
           <SearchBar
             onFocus={this.clearFilters}
             filterSearch={ (e) => this.filterBySearch(this.allVenues, e.target.value) }
           />
-          {this.state.venues ? <VenueList venues={this.state.venues} /> : null}
+
+          { this.state.venues.length === 0 ?
+            <Message
+              text={`You got a little too specific, we didn't find anything.`}
+            /> : <VenueList venues={this.state.venues} />
+          }
         </section>
       </div>
     )

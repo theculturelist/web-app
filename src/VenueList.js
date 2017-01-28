@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import VenuePreview from './VenuePreview';
 
 const VenueList = (props) => (
-  <div className="venue-list flex flex-wrap mt6">
+  <div className="venue-list flex flex-wrap mt1">
     {props.venues.map(venue => (
       <VenuePreview
         city={venue.address.city}
