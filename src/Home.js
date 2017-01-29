@@ -73,20 +73,38 @@ class Home extends Component {
     return (
       <div className='home'>
         <NavBar>
-          <ToggleSwitch click={this.toggleLeftMenu} isToggled={this.state.leftMenuToggled} />
+          <ToggleButton
+            click={this.toggleLeftMenu}
+            isToggled={this.state.leftMenuToggled}
+            toggledColor={'gray'}
+            untoggledColor={'green-gradient'}
+          >
+            <div className="f6 fw1">Filters</div>
+          </ToggleButton>
         </NavBar>
 
         <LeftMenu isToggled={this.state.leftMenuToggled}>
           <section className='blue overflow-x-hidden'>
             <header className='bg-blue white flex items-center justify-between pv1 ph2'>
-              <h2 className='f4'>Filters</h2>
-              <Button
-                color={'white'}
-                textColor={'blue'}
-                name={'Reset'}
-                clickFunction={this.clearFilters}
-              />
+              <h2 className='f4'>Filters:</h2>
+              <div className="flex">
+                  <Button
+                  color={'light-blue'}
+                  textColor={'white'}
+                  name={'Reset'}
+                  clickFunction={this.clearFilters}
+                />
+                <div className="dn-l ml2">
+                  <Button
+                    color={'white'}
+                    textColor={'blue'}
+                    name={'Apply'}
+                    clickFunction={this.toggleLeftMenu}
+                  />
+                </div>
+              </div>
             </header>
+
             <div className='filter-toggles flex flex-wrap ph2 mt2'>
               <div className="mb2 mr2">
                 <ToggleButton

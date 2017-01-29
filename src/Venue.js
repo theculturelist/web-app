@@ -120,7 +120,7 @@ class Venue extends Component {
                     <h4 className="mb1">
                       Phone Number:
                     </h4>
-                    <a href="tel:" className="blue dim fade">
+                    <a href={`tel:${venue.phone}`} className="blue dim fade">
                       {venue.phone}
                     </a>
                   </article>
