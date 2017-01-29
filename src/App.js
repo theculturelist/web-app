@@ -24,9 +24,11 @@ class App extends Component {
         })
         .then(data => {
           const user_location = JSON.parse(sessionStorage.getItem('userLocation'))
-          const venue_data = map(data, venue => (
+          const venue_data = map(data, venue => {
             venue.distance = metersToMiles(metersAway(user_location, venue.location))
-          ))
+            return venue
+          })
+
           sessionStorage.setItem('venues', JSON.stringify(venue_data))
           this.setState({venuesLoaded: true })
         })
