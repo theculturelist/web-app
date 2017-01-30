@@ -111,9 +111,12 @@ class Venue extends Component {
                     <h4 className="mb1">
                       Address:
                     </h4>
-                    <p className="mt0 pt0">
+                    <a
+                      className="blue fade link mt0 pt0"
+                      href={`https://maps.apple.com/?ll=${venue.location.lat},${venue.location.lng}&q=${venue.name.full}`} target="_blank"
+                    >
                       {venue.address.formatted_address}
-                    </p>
+                    </a>
                   </article>
 
                   <article className="phone-number">
