@@ -8,7 +8,7 @@ class RelatedVenues extends Component {
   state = { relatedVenues: [], loaded: false }
 
   componentDidMount() {
-    map(Object.keys(this.props.relatedVenues), venue => {
+    map(Object.keys(this.props.venues), venue => {
       base.fetch(`venues/${venue}`, {
         context: this,
       })
@@ -23,7 +23,7 @@ class RelatedVenues extends Component {
   }
 
   checkIsFinished = () => {
-    if (this.state.relatedVenues.length === Object.keys(this.props.relatedVenues).length) {
+    if (this.state.relatedVenues.length === Object.keys(this.props.venues).length) {
       this.setState({ loaded: true })
     }
   }

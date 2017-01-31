@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import ReactSpinner from 'react-spinjs'
 import NavBar from './NavBar'
 import VenueHeader from './VenueHeader'
+import HoursList from './HoursList'
 import RelatedVenues from './RelatedVenues'
+import EventList from './EventList'
 import base from './config/Rebase'
 import CloudinaryImage from './CloudinaryImage'
 
@@ -20,16 +22,11 @@ class Venue extends Component {
     }
   }
 
-
   fetchRelatedVenues = (key) => {
     base.fetch(`venues/${key}`, { context: this })
     .then(data => {
       this.setState({venue: data, loaded: true })
     })
-  }
-
-  renderClosedOn = (hours) => {
-    return hours ? <li className="ph0 pv1 i">Closed On: {hours}</li> : null
   }
 
   render() {
@@ -40,7 +37,9 @@ class Venue extends Component {
           background:
           `url(https://res.cloudinary.com/theculturelist/image/upload/e_blur:200/q_auto/${venue.media.widescreen}) no-repeat center center fixed`,
           backgroundSize: 'cover'}}>
+
           <NavBar />
+
           <div className="pt5 pt6-ns vh-100">
             <CloudinaryImage
               alt='Venue Main Image'
@@ -49,18 +48,22 @@ class Venue extends Component {
               transform={{quality: 'auto'}}
             />
 
-            <div className="bg-near-white br2-ns center dark-gray ph2 ph4-l pv2 mb3 w-100 w-80-ns shadow-1">
+            <div className="bg-near-white br2-ns center dark-gray ph2 ph5-l pv2 mb3 w-100 w-80-ns shadow-1">
               <VenueHeader name={venue.name} size={'f3 f2-l'} />
               <hr />
-              <div className="flex">
+              <div className="flex flex-wrap">
 
-                <section className="w-50 dn db-ns">
+                <section className="w-100 order-0-ns order-last w-50-ns">
                   <CloudinaryImage
                     alt='Venue Main Image'
-                    className='ba b--silver mt3 br2 mb0 pb0 w-100'
+                    className='ba b--silver dn db-ns mt3 br2 mb0 pb0 w-100'
                     src={venue.media.thumbnail}
                     transform={{quality: 'auto'}}
                   />
+
+                  { venue.events ? <EventList events={venue.events} /> : null }
+                  { venue.related_venues ? <RelatedVenues venues={venue.related_venues} /> : null }
+
                 </section>
 
                 <section className="w-100 w-50-ns pl4-ns">
@@ -68,49 +71,21 @@ class Venue extends Component {
                     {venue.description}
                   </p>
 
-                  <div className="hours">
-                    <h4 className="mb1">
-                      Hours:
-                    </h4>
-                    <ul className="list mt0 pl0 ml0 f6">
-                      <li className="ph0 pv1">
-                        Saturday: {venue.hours.saturday}
-                      </li>
-                      <li className="ph0 pv1">
-                        Sunday: {venue.hours.sunday}
-                      </li>
-                      <li className="ph0 pv1">
-                        Monday: {venue.hours.monday}
-                      </li>
-                      <li className="ph0 pv1">
-                        Tuesday: {venue.hours.tuesday}
-                      </li>
-                      <li className="ph0 pv1">
-                        Wednesday: {venue.hours.wednesday}
-                      </li>
-                      <li className="ph0 pv1">
-                        Thursday: {venue.hours.thursday}
-                      </li>
-                      <li className="ph0 pv1">
-                        Friday: {venue.hours.friday}
-                      </li>
-                      {this.renderClosedOn(venue.hours.closed_on)}
-                    </ul>
-                  </div>
+                  <HoursList hours={venue.hours} />
 
                   <article className="website">
-                    <h4 className="mb1">
+                    <h5 className="mb1">
                       Website:
-                    </h4>
+                    </h5>
                     <a className="blue dim fade" href={`http://${venue.website}`} target="_blank">
                       {venue.website}
                     </a>
                   </article>
 
                   <article className="physical-address">
-                    <h4 className="mb1">
+                    <h5 className="mb1">
                       Address:
-                    </h4>
+                    </h5>
                     <a
                       className="blue fade link mt0 pt0"
                       href={`https://maps.apple.com/?ll=${venue.location.lat},${venue.location.lng}&q=${venue.name.full}`} target="_blank"
@@ -120,9 +95,9 @@ class Venue extends Component {
                   </article>
 
                   <article className="phone-number">
-                    <h4 className="mb1">
+                    <h5 className="mb1">
                       Phone Number:
-                    </h4>
+                    </h5>
                     <a href={`tel:${venue.phone}`} className="blue dim fade">
                       {venue.phone}
                     </a>
@@ -131,11 +106,7 @@ class Venue extends Component {
                 </section>
               </div>
 
-              <section>
-                { venue.related_venues ?
-                  <RelatedVenues relatedVenues={venue.related_venues} /> : null
-                }
-              </section>
+
             </div>
           </div>
         </article>

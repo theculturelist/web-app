@@ -7,7 +7,6 @@ import { hoursToday } from './utilities'
 import SearchBar from './SearchBar'
 import Button from './Button'
 import ToggleButton from './ToggleButton'
-import ToggleSwitch from './ToggleSwitch'
 import VenueList from './VenueList'
 import Message from './Message'
 
