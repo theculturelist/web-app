@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-scripts": "0.7.0"
+    "react-scripts": "0.9.5"
   },
   "engines": {
     "node": "6.9.1",
@@ -12,14 +12,14 @@
   "dependencies": {
     "animate.css": "~3.5.2",
     "classnames": "~2.2.5",
-    "cloudinary": "~1.4.4",
+    "cloudinary": "^1.8.0",
     "geolib": "~2.0.22",
     "lodash": "~4.17.2",
-    "moment": "~2.15.1",
+    "moment": "^2.18.1",
     "promised-location": "~1.0.1",
     "re-base": "~2.3.0",
-    "react": "~15.3.1",
-    "react-dom": "~15.3.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
     "react-router": "~2.8.1",
     "react-spinjs": "~3.0.0",
     "tachyons": "~4.6.1"
