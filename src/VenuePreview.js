@@ -1,4 +1,4 @@
-import React, { Component, PropTypes as PT} from 'react'
+import React, { PureComponent, PropTypes as PT} from 'react'
 import { map } from 'lodash'
 import { Link } from 'react-router'
 import { hoursToday } from './utilities'
@@ -6,7 +6,7 @@ import VenueHeader from './VenueHeader'
 import Tag from './Tag'
 import CloudinaryImage from './CloudinaryImage'
 
-class VenuePreview extends Component {
+class VenuePreview extends PureComponent {
   static propTypes = {
     city: PT.string,
     hours: PT.object.isRequired,
@@ -23,13 +23,6 @@ class VenuePreview extends Component {
     id: '1234567890',
     name: 'Undefined Venue',
     thumbnail: `Placeholder-16x9_zpm4cq.jpg`,
-  }
-
-  shouldComponentUpdate(nextProps) {
-    if (this.props !== nextProps) {
-      return true
-    }
-    return false
   }
 
   render() {
@@ -53,7 +46,8 @@ class VenuePreview extends Component {
               <span className="b">Hours Today:</span> {hoursToday(this.props.hours)}
             </h3>
             <h3 className="f5 fw4 lh-copy mt0">
-             {this.props.distance ? `${this.props.distance} Miles Away in ${this.props.city}` : null}
+             {`${this.props.city}`}
+             {this.props.distance ? ` (${this.props.distance} Miles Away)` : null}
             </h3>
             <div className="flex flex-wrap items-center">
               { map(Object.keys(this.props.tags), t => (<Tag key={t} name={t} />)) }
