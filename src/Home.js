@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { capitalize, concat, filter, includes, sortBy } from 'lodash'
+import PromisedLocation from 'promised-location'
+import { capitalize, concat, filter, includes, sortBy, map } from 'lodash'
 import Icon from './Icon'
 import NavBar from './NavBar'
 import LeftMenu from './LeftMenu'
@@ -9,6 +10,7 @@ import Button from './Button'
 import ToggleButton from './ToggleButton'
 import VenueList from './VenueList'
 import Message from './Message'
+import { metersAway, metersToMiles } from './utilities'
 
 class Home extends Component {
     tags = [
@@ -25,20 +27,45 @@ class Home extends Component {
       'unique',
       'mechanical'
     ]
-    allVenues = JSON.parse(sessionStorage.getItem('venues'))
     state = {
       activeFilters: [],
+      allVenues: JSON.parse(sessionStorage.getItem('venues')),
       leftMenuToggled: false,
-      userLocation: JSON.parse(sessionStorage.getItem('userLocation')),
+      userLocation: '',
       venues: JSON.parse(sessionStorage.getItem('venues')),
     }
+
+  componentWillMount() {
+    this.getUserLocation()
+  }
+
+  getUserLocation = () => {
+    const locator = new PromisedLocation()
+    locator.then(position => {
+      const location = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      }
+      this.setState({'userLocation' : location})
+      this.updateVenueLocations()
+    })
+  }
+
+  updateVenueLocations = () => {
+    const venue_data = this.state.venues.map(venue => {
+      venue.distance = metersToMiles(metersAway(this.state.userLocation, venue.location))
+      return venue
+    })
+
+    this.setState({venues: venue_data, allVenues: venue_data })
+  }
 
   addActiveFilter = (term) => {
     this.setState({ activeFilters: concat(this.state.activeFilters, term) })
   }
 
   clearFilters = () => {
-    this.setState({ venues: this.allVenues, activeFilters: [] })
+    this.setState({ venues: this.state.allVenues, activeFilters: [] })
   }
 
   sortNearby = (state, term) => {
