@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PromisedLocation from 'promised-location'
-import { capitalize, concat, filter, includes, sortBy, map } from 'lodash'
+import { capitalize, concat, filter, includes, sortBy } from 'lodash'
 import Icon from './Icon'
 import NavBar from './NavBar'
 import LeftMenu from './LeftMenu'
@@ -31,7 +31,7 @@ class Home extends Component {
       activeFilters: [],
       allVenues: JSON.parse(sessionStorage.getItem('venues')),
       leftMenuToggled: false,
-      userLocation: '',
+      userLocation: false,
       venues: JSON.parse(sessionStorage.getItem('venues')),
     }
 
@@ -56,7 +56,6 @@ class Home extends Component {
       venue.distance = metersToMiles(metersAway(this.state.userLocation, venue.location))
       return venue
     })
-
     this.setState({venues: venue_data, allVenues: venue_data })
   }
 
@@ -74,7 +73,9 @@ class Home extends Component {
   }
 
   filterByOpen = (state, term) => {
-    this.setState({ venues: filter(state, el => ( hoursToday(el.hours) !== 'Closed' )) })
+    this.setState({
+      venues: filter(state, el => ( hoursToday(el.hours) !== 'Closed' ))
+    })
     this.addActiveFilter(term)
   }
 
@@ -132,20 +133,27 @@ class Home extends Component {
             </header>
 
             <div className='filter-toggles flex flex-wrap ph2 mt2'>
-              <div className="mb2 mr2">
-                <ToggleButton
-                  click={() => this.sortNearby(this.state.venues, 'distance')}
-                  isToggled={ includes(this.state.activeFilters, 'distance')}
-                >
-                  <div className="pr1">Nearby</div><Icon iconName={'nearby'} />
-                </ToggleButton>
-              </div>
+              {this.state.userLocation ?
+                <div className="mb2 mr2">
+                  <ToggleButton
+                    click={() => this.sortNearby(this.state.venues, 'distance')}
+                    isToggled={ includes(this.state.activeFilters, 'distance')}
+                  >
+                    <div className="pr1">Nearby</div><Icon iconName={'nearby'} />
+                  </ToggleButton>
+                </div>
+                : null
+              }
+
               <div className="mb2 mr2">
                 <ToggleButton
                   click={() => { this.filterByOpen(this.state.venues, 'open') }}
                   isToggled={ includes(this.state.activeFilters, 'open')}
                 >
-                  <div className="pr1">Open Today</div><Icon iconName={'open'} />
+                  <div className="pr1">
+                    Open Today
+                  </div>
+                    <Icon iconName={'open'} />
                 </ToggleButton>
               </div>
               {this.tags.map(tag => (
@@ -165,16 +173,17 @@ class Home extends Component {
           </section>
         </LeftMenu>
 
-        <section className='fr w-100 w-80-l'>
+        <section className='fr w-100 w-80-l mt4'>
           <SearchBar
             onFocus={this.clearFilters}
-            filterSearch={ (e) => this.filterBySearch(this.allVenues, e.target.value) }
+            filterSearch={ (e) => this.filterBySearch(this.state.allVenues, e.target.value) }
           />
 
           { this.state.venues.length === 0 ?
             <Message
               text={`You got a little too specific, we didn't find anything.`}
-            /> : <VenueList venues={this.state.venues} />
+            />
+            : <VenueList venues={this.state.venues} />
           }
         </section>
       </div>

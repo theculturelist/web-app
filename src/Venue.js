@@ -48,7 +48,7 @@ class Venue extends Component {
               transform={{quality: 'auto'}}
             />
 
-            <div className="bg-near-white br2-ns center dark-gray ph2 ph5-l pv2 mb3 w-100 w-80-ns shadow-1">
+            <div className="bg-near-white br2-ns center dark-gray ph2 ph5-l pt2 pb5 mb4 w-100 w-80-ns shadow-2">
               <VenueHeader name={venue.name} size={'f3 f2-l'} />
               <hr />
               <div className="flex flex-wrap">

@@ -18,6 +18,7 @@ const CloudinaryImage = (props) => {
       className={props.className}
       src={cloudinary.url(props.src, props.transform)}
       alt={props.name}
+      style={props.style}
     />
   );
 }

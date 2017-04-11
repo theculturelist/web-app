@@ -27,7 +27,7 @@ class VenuePreview extends PureComponent {
 
   render() {
     return(
-      <article className="venue-preview animated fadeIn ph2 pl3-l pv3 w-100 w-50-m w-third-l">
+      <article className="venue-preview animated fadeIn flex ph2 pl3-l pv3 w-100 w-50-m w-third-l">
         <div className="b--light-silver ba bg-white br2 overflow-hidden">
           <Link to={`/venues/${this.props.id}`} className="link">
             <CloudinaryImage
