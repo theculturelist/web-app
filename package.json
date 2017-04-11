@@ -18,11 +18,11 @@
     "moment": "^2.18.1",
     "promised-location": "~1.0.1",
     "re-base": "~2.3.0",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
+    "react": "^15.5.3",
+    "react-dom": "^15.5.3",
     "react-router": "~2.8.1",
     "react-spinjs": "~3.0.0",
-    "tachyons": "~4.6.1"
+    "tachyons": "^4.7.0"
   },
   "scripts": {
     "start": "react-scripts start",
