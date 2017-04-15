@@ -1,4 +1,4 @@
-import React, { PureComponent, PropTypes as PT} from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import { map } from 'lodash'
 import { Link } from 'react-router'
 import { hoursToday } from './utilities'
@@ -8,14 +8,14 @@ import CloudinaryImage from './CloudinaryImage'
 
 class VenuePreview extends PureComponent {
   static propTypes = {
-    city: PT.string,
-    hours: PT.object.isRequired,
-    id: PT.string.isRequired,
-    location: PT.object,
-    name: PT.object.isRequired,
-    tags: PT.object,
-    thumbnail: PT.string.isRequired,
-    distance: PT.string,
+    city: PropTypes.string,
+    hours: PropTypes.object.isRequired,
+    id: PropTypes.string.isRequired,
+    location: PropTypes.object,
+    name: PropTypes.object.isRequired,
+    tags: PropTypes.object,
+    thumbnail: PropTypes.string.isRequired,
+    distance: PropTypes.string,
   }
 
   static defaultProps = {

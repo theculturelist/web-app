@@ -6,7 +6,6 @@ class Button extends PureComponent {
       <button className={`bg-${this.props.color} ${this.props.textColor} f${this.props.fontSize}
         bn br-pill dib link ph3 pointer outline-0 pv2 ttc`}
         onClick={this.props.clickFunction}
-        disabled={this.props.disabled}
         >
         {this.props.children}
       </button>
@@ -17,7 +16,6 @@ class Button extends PureComponent {
 
 Button.propTypes = {
   clickFunction: PropTypes.func,
-  color: PropTypes.string,
   color: PropTypes.string,
   fontSize: PropTypes.string,
   children: PropTypes.node,

@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import base from './config/Rebase'
 import { concat, map } from 'lodash'
 import EventListItem from './EventListItem'
 
-class EventList extends Component {
+class EventList extends PureComponent {
   static propTypes = {
     events: PropTypes.object
   }

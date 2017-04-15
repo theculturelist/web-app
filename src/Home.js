@@ -106,7 +106,7 @@ class Home extends Component {
             click={this.toggleLeftMenu}
             isToggled={this.state.leftMenuToggled}
             toggledColor={'gray'}
-            untoggledColor={'green-gradient'}
+            untoggledColor={'gradient-green'}
           >
             <div className="f6 flex">
               <i className="icon-filter mr1" /> Filters

@@ -8,7 +8,7 @@ const Messages = [
   'Setting Phasers to Stun',
   'Aligning the Planets',
   'Contacting the Mothership',
-  'Initializing your Experience',
+  'Initializing Venues',
   'Twiddling Knobs and Pushing Buttons'
 ]
 
