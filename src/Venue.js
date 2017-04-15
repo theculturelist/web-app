@@ -39,76 +39,77 @@ class Venue extends Component {
           backgroundSize: 'cover'}}>
 
           <NavBar />
-
-          <div className="pt5 pt6-ns vh-100">
+          <div className="pt0 pt6-ns">
             <CloudinaryImage
               alt='Venue Main Image'
-              className='dn-ns w-100'
+              className='dn-ns w-100 mb0 pb0'
               src={venue.media.widescreen}
+              style={{ paddingTop: "6rem"}}
               transform={{quality: 'auto'}}
             />
 
-            <div className="bg-near-white br2-ns center dark-gray ph2 ph5-l pt2 pb5 mb4 w-100 w-80-ns shadow-2">
-              <VenueHeader name={venue.name} size={'f3 f2-l'} />
-              <hr />
-              <div className="flex flex-wrap">
 
-                <section className="w-100 order-0-ns order-last w-50-ns">
-                  <CloudinaryImage
-                    alt='Venue Main Image'
-                    className='ba b--silver dn db-ns mt3 br2 mb0 pb0 w-100'
-                    src={venue.media.thumbnail}
-                    transform={{quality: 'auto'}}
-                  />
+              <div className="bg-near-white br2-ns center dark-gray pt2 ph2 ph5-l pb5 w-100 w-80-ns shadow-2">
+                <VenueHeader name={venue.name} size={'f3 f2-l'} />
+                <hr />
+                <div className="flex flex-wrap">
 
-                  { venue.events ? <EventList events={venue.events} /> : null }
-                  { venue.related_venues ? <RelatedVenues venues={venue.related_venues} /> : null }
+                  <section className="w-100 order-0-ns order-last w-50-ns">
+                    <CloudinaryImage
+                      alt='Venue Main Image'
+                      className='ba b--silver dn db-ns mt3 br2 mb0 pb0 w-100'
+                      src={venue.media.thumbnail}
+                      transform={{quality: 'auto'}}
+                    />
 
-                </section>
+                    { venue.events ? <EventList events={venue.events} /> : null }
+                    { venue.related_venues ? <RelatedVenues venues={venue.related_venues} /> : null }
 
-                <section className="w-100 w-50-ns pl4-ns">
-                  <p className="system-sans-serif lh-copy">
-                    {venue.description}
-                  </p>
+                  </section>
 
-                  <HoursList hours={venue.hours} />
+                  <section className="w-100 w-50-ns pl4-ns">
+                    <p className="system-sans-serif lh-copy">
+                      {venue.description}
+                    </p>
 
-                  <article className="website">
-                    <h5 className="mb1">
-                      Website:
-                    </h5>
-                    <a className="blue dim fade" href={`http://${venue.website}`} target="_blank">
-                      {venue.website}
-                    </a>
-                  </article>
+                    <HoursList hours={venue.hours} />
 
-                  <article className="physical-address">
-                    <h5 className="mb1">
-                      Address:
-                    </h5>
-                    <a
-                      className="blue fade link mt0 pt0"
-                      href={`https://maps.apple.com/?ll=${venue.location.lat},${venue.location.lng}&q=${venue.name.full}`} target="_blank"
-                    >
-                      {venue.address.formatted_address}
-                    </a>
-                  </article>
+                    <article className="website">
+                      <h5 className="mb1">
+                        Website:
+                      </h5>
+                      <a className="blue dim fade" href={`http://${venue.website}`} target="_blank">
+                        {venue.website}
+                      </a>
+                    </article>
 
-                  <article className="phone-number">
-                    <h5 className="mb1">
-                      Phone Number:
-                    </h5>
-                    <a href={`tel:${venue.phone}`} className="blue dim fade">
-                      {venue.phone}
-                    </a>
-                  </article>
+                    <article className="physical-address">
+                      <h5 className="mb1">
+                        Address:
+                      </h5>
+                      <a
+                        className="blue fade link mt0 pt0"
+                        href={`https://maps.apple.com/?ll=${venue.location.lat},${venue.location.lng}&q=${venue.name.full}`} target="_blank"
+                      >
+                        {venue.address.formatted_address}
+                      </a>
+                    </article>
 
-                </section>
+                    <article className="phone-number">
+                      <h5 className="mb1">
+                        Phone Number:
+                      </h5>
+                      <a href={`tel:${venue.phone}`} className="blue dim fade">
+                        {venue.phone}
+                      </a>
+                    </article>
+
+                  </section>
+                </div>
+
+
               </div>
-
-
             </div>
-          </div>
         </article>
       : <ReactSpinner />
     )

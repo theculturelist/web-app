@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PromisedLocation from 'promised-location'
 import { capitalize, concat, filter, includes, sortBy } from 'lodash'
-import Icon from './Icon'
 import NavBar from './NavBar'
 import LeftMenu from './LeftMenu'
 import { hoursToday } from './utilities'
@@ -49,6 +48,9 @@ class Home extends Component {
       this.setState({'userLocation' : location})
       this.updateVenueLocations()
     })
+    .catch((error) => (console.log(error))
+
+    )
   }
 
   updateVenueLocations = () => {
@@ -106,7 +108,9 @@ class Home extends Component {
             toggledColor={'gray'}
             untoggledColor={'green-gradient'}
           >
-            <div className="f6 fw1">Filters</div>
+            <div className="f6 flex">
+              <i className="icon-filter mr1" /> Filters
+            </div>
           </ToggleButton>
         </NavBar>
 
@@ -119,31 +123,37 @@ class Home extends Component {
                   color={'light-blue'}
                   textColor={'white'}
                   name={'Reset'}
-                  clickFunction={this.clearFilters}
-                />
+                  clickFunction={this.clearFilters}>
+                   Reset
+                   <i className="icon-reset ml1" />
+                  </Button>
                 <div className="dn-l ml2">
                   <Button
                     color={'white'}
                     textColor={'blue'}
                     name={'Apply'}
                     clickFunction={this.toggleLeftMenu}
-                  />
+                  >
+                    Apply
+                    <i className="icon-apply ml1" />
+                  </Button>
                 </div>
               </div>
             </header>
 
             <div className='filter-toggles flex flex-wrap ph2 mt2'>
-              {this.state.userLocation ?
-                <div className="mb2 mr2">
-                  <ToggleButton
-                    click={() => this.sortNearby(this.state.venues, 'distance')}
-                    isToggled={ includes(this.state.activeFilters, 'distance')}
-                  >
-                    <div className="pr1">Nearby</div><Icon iconName={'nearby'} />
-                  </ToggleButton>
-                </div>
-                : null
-              }
+              <div className="mb2 mr2">
+                <ToggleButton
+                  click={() => this.sortNearby(this.state.venues, 'distance')}
+                  isToggled={ includes(this.state.activeFilters, 'distance')}
+                  disabled={!this.state.userLocation}
+                >
+                  <div className="pr1">
+                    Nearby
+                  </div>
+                  <i className="icon-nearby"/>
+                </ToggleButton>
+              </div>
 
               <div className="mb2 mr2">
                 <ToggleButton
@@ -153,7 +163,7 @@ class Home extends Component {
                   <div className="pr1">
                     Open Today
                   </div>
-                    <Icon iconName={'open'} />
+                    <i className="icon-open" />
                 </ToggleButton>
               </div>
               {this.tags.map(tag => (
@@ -162,7 +172,9 @@ class Home extends Component {
                     click={() => { this.filterByTag(this.state.venues, tag) }}
                     isToggled={ includes(this.state.activeFilters, tag) }
                   >
-                    <div className="pr1">{tag}</div><Icon iconName={tag} />
+                    <div className="pr1">
+                      {tag} <i className={`icon-${tag}`} />
+                    </div>
                   </ToggleButton>
                 </div>
               ))}

@@ -1,21 +1,26 @@
-import React, { PropTypes } from 'react';
-import cn from 'classnames';
+import React, { PureComponent, PropTypes } from 'react';
 
-const Button = (props) => (
-  <button
-    className={cn(`bg-${props.color} ${props.textColor} f${props.fontSize}
-    bn br-pill dib link ph3 pointer outline-0 pv2 ttc`)}
-    onClick={props.clickFunction}
-  >
-    {props.name}
-  </button>
-);
+class Button extends PureComponent {
+  render() {
+    return (
+      <button className={`bg-${this.props.color} ${this.props.textColor} f${this.props.fontSize}
+        bn br-pill dib link ph3 pointer outline-0 pv2 ttc`}
+        onClick={this.props.clickFunction}
+        disabled={this.props.disabled}
+        >
+        {this.props.children}
+      </button>
+    );
+  }
+}
+
 
 Button.propTypes = {
   clickFunction: PropTypes.func,
   color: PropTypes.string,
+  color: PropTypes.string,
   fontSize: PropTypes.string,
-  name: PropTypes.string.isRequired,
+  children: PropTypes.node,
   textColor: PropTypes.string,
 };
 
