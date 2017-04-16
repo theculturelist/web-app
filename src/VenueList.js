@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import VenuePreview from './VenuePreview';
 import { forceCheck } from 'react-lazyload';
 
@@ -6,7 +7,7 @@ class VenueList extends PureComponent {
   componentDidUpdate() {
     forceCheck();
   }
-  
+
   render() {
     return (
       <div className="venue-list flex flex-wrap mt1">

@@ -1,11 +1,9 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 class VenueHeader extends PureComponent {
-
   renderAbbreviation = (abbr) => (abbr ? `(${abbr})` : null)
-
   renderThe = (proper) => (proper ? 'The' : null)
-
   render() {
     return (
       <header>

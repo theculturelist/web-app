@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types';
 import { Link } from 'react-router'
 import logo from './images/logo.png'
 import icon from './images/icon.svg'
