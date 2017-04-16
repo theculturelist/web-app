@@ -12,13 +12,13 @@ class Venue extends Component {
   state = { venue: false, loaded: false }
 
   componentDidMount() {
-    this.fetchRelatedVenues(this.props.params.id)
+    this.fetchRelatedVenues(this.props.match.params.id)
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.params.id !== this.props.params.id ) {
+    if (nextProps.match.params.id !== this.props.match.params.id ) {
       this.setState({ loaded: false })
-      this.fetchRelatedVenues(nextProps.params.id)
+      this.fetchRelatedVenues(nextProps.match.params.id)
     }
   }
 
@@ -33,12 +33,15 @@ class Venue extends Component {
     const venue = this.state.venue
     return (
       this.state.loaded ?
-        <article style={{
+        <article
+          className="animated fadeIn"
+          style={{
           background:
           `url(https://res.cloudinary.com/theculturelist/image/upload/e_blur:200/q_auto/${venue.media.widescreen}) no-repeat center center fixed`,
-          backgroundSize: 'cover'}}>
-
+          backgroundSize: 'cover'}}
+        >
           <NavBar />
+
           <div className="pt0 pt6-ns">
             <CloudinaryImage
               alt='Venue Main Image'
@@ -112,7 +115,9 @@ class Venue extends Component {
               </div>
             </div>
         </article>
-      : <ReactSpinner />
+      : <div className="vh-100 w-100 bg-near-white">
+          <ReactSpinner />
+        </div>
     )
   }
 }

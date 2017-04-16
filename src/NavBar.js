@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types';
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import logo from './images/logo.png'
 import icon from './images/icon.svg'
 
@@ -56,4 +56,4 @@ NavBar.propTypes = {
   children: PropTypes.node
 }
 
-export default NavBar
+export default NavBar;

@@ -23,7 +23,7 @@
     "react-dom": "^15.5.4",
     "react-image": "^1.0.0",
     "react-lazyload": "^2.2.7",
-    "react-router": "~2.8.1",
+    "react-router-dom": "^4.1.1",
     "react-spinjs": "~3.0.0",
     "tachyons": "^4.7.0"
   },

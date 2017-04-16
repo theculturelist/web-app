@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Router, Route, hashHistory } from 'react-router'
+import { Route, Switch } from 'react-router-dom'
 import Home from './Home'
-import InitScreen from './InitScreen'
 import Venue from './Venue'
+import InitScreen from './InitScreen'
 import base from './config/Rebase'
 
 class App extends Component {
@@ -31,12 +31,10 @@ class App extends Component {
   render() {
     return (
       this.state.venuesLoaded ?
-        <Router history={hashHistory}>
-          <Route>
-            <Route path="/" component={Home} />
-            <Route path="/venues/:id" component={Venue} />
-          </Route>
-        </Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/venues/:id" component={Venue} />
+        </Switch>
       : <InitScreen />
     )
   }
