@@ -1,6 +1,8 @@
-import React, { PropTypes } from 'react';
-import cloudinary from 'cloudinary';
-import env from './config/env';
+import React, { Component, PropTypes } from 'react'
+import Img from 'react-image'
+import LazyLoad from 'react-lazyload'
+import cloudinary from 'cloudinary'
+import env from './config/env'
 
 cloudinary.config(
   {
@@ -11,20 +13,40 @@ cloudinary.config(
   }
 )
 
-const CloudinaryImage = (props) => {
-  return (
-    //TODO RENDER AN SVG WHILE LOADING
-    <img
-      className={props.className}
-      src={cloudinary.url(props.src, props.transform)}
-      alt={props.name}
-      style={props.style}
-    />
-  );
+class CloudinaryImage extends Component {
+  imgUrl = cloudinary.url(this.props.src, this.props.transform)
+
+  getAspectRatio = (ratio) => {
+    const ratioMap = {thumbnail: '1x1', widescreen: '16x9'};
+    return ratioMap[ratio];
+  }
+
+  render() {
+    return (
+      <LazyLoad
+        height={null}
+        offset={200}
+        once
+      >
+        <Img
+          className={`animated fadeIn ${this.props.className}`}
+          src={this.imgUrl}
+          alt={this.props.name}
+          style={this.props.style}
+          loader={
+            <div className={`aspect-ratio aspect-ratio--${this.getAspectRatio(this.props.aspectRatio)} bg-light-gray`}>
+              <div className="aspect-ratio-object" />
+            </div>
+          }
+        />
+      </LazyLoad>
+    );
+  }
 }
 
 CloudinaryImage.propTypes = {
   alt: PropTypes.string.isRequired,
+  aspectRatio: PropTypes.string.isRequired,
   className: PropTypes.string,
   src: PropTypes.string.isRequired,
   transform: PropTypes.object,
@@ -32,6 +54,7 @@ CloudinaryImage.propTypes = {
 
 CloudinaryImage.defaultProps = {
   alt: 'Placeholder Image',
+  aspectRatio: 'widescreen',
   src: `Placeholder-16x9_zpm4cq.jpg`,
 };
 

@@ -56,6 +56,7 @@ class Venue extends Component {
 
                   <section className="w-100 order-0-ns order-last w-50-ns">
                     <CloudinaryImage
+                      aspectRatio='thumbnail'
                       alt='Venue Main Image'
                       className='ba b--silver dn db-ns mt3 br2 mb0 pb0 w-100'
                       src={venue.media.thumbnail}

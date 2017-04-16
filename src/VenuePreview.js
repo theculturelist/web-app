@@ -7,28 +7,10 @@ import Tag from './Tag'
 import CloudinaryImage from './CloudinaryImage'
 
 class VenuePreview extends PureComponent {
-  static propTypes = {
-    city: PropTypes.string,
-    hours: PropTypes.object.isRequired,
-    id: PropTypes.string.isRequired,
-    location: PropTypes.object,
-    name: PropTypes.object.isRequired,
-    tags: PropTypes.object,
-    thumbnail: PropTypes.string.isRequired,
-    distance: PropTypes.string,
-  }
-
-  static defaultProps = {
-    address: '123 Street St, Los Angeles, CA 90001',
-    id: '1234567890',
-    name: 'Undefined Venue',
-    thumbnail: `Placeholder-16x9_zpm4cq.jpg`,
-  }
-
   render() {
     return(
       <article className="venue-preview animated fadeIn flex ph2 pl3-l pv3 w-100 w-50-m w-third-l">
-        <div className="b--light-silver ba bg-white br2 overflow-hidden">
+        <div className="b--light-silver ba bg-white br2 overflow-hidden w-100">
           <Link to={`/venues/${this.props.id}`} className="link">
             <CloudinaryImage
               className="b--light-gray bb dim pointer w-100"
@@ -58,5 +40,24 @@ class VenuePreview extends PureComponent {
     )
   }
 }
+
+VenuePreview.propTypes = {
+  city: PropTypes.string,
+  hours: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
+  location: PropTypes.object,
+  name: PropTypes.object.isRequired,
+  tags: PropTypes.object,
+  thumbnail: PropTypes.string.isRequired,
+  distance: PropTypes.string,
+}
+
+VenuePreview.defaultProps = {
+  address: '123 Street St, Los Angeles, CA 90001',
+  id: '1234567890',
+  name: 'Undefined Venue',
+  thumbnail: `Placeholder-16x9_zpm4cq.jpg`,
+}
+
 
 export default VenuePreview

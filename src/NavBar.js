@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react'
 import { Link } from 'react-router'
-import CloudinaryImage from './CloudinaryImage'
+import logo from './images/logo.png'
+import icon from './images/icon.svg'
 
 class NavBar extends PureComponent {
   render() {
@@ -23,16 +24,16 @@ class NavBar extends PureComponent {
           </div>
           <Link to='/' className="pointer">
             <div className="dn-ns">
-              <CloudinaryImage
-                alt='The Culture List Icon'
+              <img
                 className='h2 w2 pointer'
-                src='icon_yh2ghw.svg'
+                src={icon}
+                alt='The Culture List'
               />
             </div>
             <div className="dn db-ns">
-              <CloudinaryImage
+              <img
+                src={logo}
                 alt='The Culture List'
-                src='/landing-page/TCL_logo_white_icon_blue.png'
                 style={{ height: "2.5rem"}}
               />
             </div>
