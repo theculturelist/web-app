@@ -9,13 +9,13 @@ class NavBar extends PureComponent {
     return (
       <div className='nav-bar fixed z-2'>
         <div className="fixed h2 w-100 bg-near-black flex items-center justify-center justify-end-ns ph4">
-          <a href="https://www.instagram.com/culture_list" target="_blank" className="pv2 ph3 f4 pointer link light-gray dim outline-0">
+          <a href="https://www.instagram.com/culture_list" rel="noopener noreferrer" target="_blank" className="pv2 ph3 f4 pointer link light-gray dim outline-0">
             <i className="icon-instagram"/>
           </a>
-          <a href="https://twitter.com/culture_list" target="_blank" className="pv2 ph3 f4 pointer link light-gray dim outline-0">
+          <a href="https://twitter.com/culture_list" rel="noopener noreferrer" target="_blank" className="pv2 ph3 f4 pointer link light-gray dim outline-0">
             <i className="icon-twitter"/>
           </a>
-          <a href="https://www.facebook.com/theculturelist" target="_blank" className="pv2 ph3 f4 pointer link light-gray dim outline-0">
+          <a href="https://www.facebook.com/theculturelist" rel="noopener noreferrer" target="_blank" className="pv2 ph3 f4 pointer link light-gray dim outline-0">
             <i className="icon-facebook"/>
           </a>
         </div>
