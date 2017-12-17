@@ -1,8 +1,7 @@
 {
   "name": "web-app",
   "description": "The Culture List Web App",
-  "scripts": {
-  },
+  "scripts": {},
   "env": {
     "REACT_APP_CLOUDINARY_API_KEY": {
       "required": "true"
@@ -21,6 +20,9 @@
     },
     "REACT_APP_FIREBASE_DATABASE_URL": {
       "required": "true"
+    },
+    "REACT_APP_FIREBASE_PROJECT_ID": {
+      "required": "true"
     }
   },
   "formation": {
@@ -28,9 +30,7 @@
       "quantity": 1
     }
   },
-  "addons": [
-
-  ],
+  "addons": [],
   "buildpacks": [
     {
       "url": "heroku/nodejs"
