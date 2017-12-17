@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactSpinner from 'react-spinjs'
 import NavBar from './NavBar'
 import VenueHeader from './VenueHeader'
 import HoursList from './HoursList'
@@ -116,7 +115,6 @@ class Venue extends Component {
             </div>
         </article>
       : <div className="vh-100 w-100 bg-near-white">
-          <ReactSpinner />
         </div>
     )
   }

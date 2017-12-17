@@ -3,16 +3,13 @@ import PropTypes from 'prop-types';
 import Img from 'react-image'
 import LazyLoad from 'react-lazyload'
 import cloudinary from 'cloudinary'
-import env from './config/env'
 
-cloudinary.config(
-  {
-    cloud_name: env.cloudinary.cloud,
-    api_key: env.cloudinary.api,
-    api_secret: env.cloudinary.secret,
-    secure: true,
-  }
-)
+cloudinary.config({
+  cloud_name: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.REACT_APP_CLOUDINARY_API_KEY,
+  api_secret: process.env.REACT_APP_CLOUDINARY_API_SECRET,
+  secure: true,
+});
 
 class CloudinaryImage extends Component {
   imgUrl = cloudinary.url(this.props.src, this.props.transform)

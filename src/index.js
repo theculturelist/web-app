@@ -10,7 +10,9 @@ import App from './App'
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <div className="system-sans-serif">
+      <App />
+    </div>
   </BrowserRouter>,
   document.getElementById('root')
 );
