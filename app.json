@@ -37,7 +37,7 @@
       "quantity": 1
     }
   },
-  "name": "web-app",
+  "name": "tcl-web",
   "scripts": {},
   "stack": "heroku-16"
 }
