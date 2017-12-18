@@ -14,6 +14,10 @@ render(
     <div className="system-sans-serif">
       <Helmet>
         <meta
+          name="google-site-verification"
+          content="jw5GnfUj_F-F-LPjlZlNdeKhYcN5c_vQTAqXz07FXNw"
+        />
+        <meta
           property="og:url"
           content={process.env.REACT_APP_ROOT_URL}
         />
