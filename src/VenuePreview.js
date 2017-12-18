@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types';
-import { map } from 'lodash'
+import map from 'lodash/map'
 import { Link } from 'react-router-dom'
 import { hoursToday } from './utilities'
 import VenueHeader from './VenueHeader'

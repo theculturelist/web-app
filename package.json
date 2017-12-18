@@ -12,6 +12,7 @@
     "re-base": "3.2.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-helmet": "^5.2.0",
     "react-image": "^1.0.0",
     "react-lazyload": "^2.2.7",
     "react-router-dom": "^4.1.1",
@@ -24,6 +25,9 @@
   "eslintConfig": {},
   "name": "web-app",
   "private": true,
+  "reactSnapshot": {
+    "snapshotDelay": 200
+  },
   "scripts": {
     "build": "react-scripts build && react-snapshot",
     "eject": "react-scripts eject",

@@ -1,5 +1,5 @@
 import React from 'react'
-import { random } from 'lodash'
+import random from 'lodash/random'
 import CloudinaryImage from './CloudinaryImage'
 
 const Messages = [

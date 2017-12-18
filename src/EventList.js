@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types';
 import base from './config/Rebase'
-import { concat, map } from 'lodash'
+import concat from 'lodash/concat'
+import map from 'lodash/map'
 import EventListItem from './EventListItem'
 
 class EventList extends PureComponent {

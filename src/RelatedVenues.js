@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { map, concat } from 'lodash'
+import concat from 'lodash/concat'
+import map from 'lodash/map'
 import base from './config/Rebase'
 import CloudinaryImage from './CloudinaryImage'
 
