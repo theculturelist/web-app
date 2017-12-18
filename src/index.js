@@ -15,7 +15,7 @@ render(
       <Helmet>
         <meta
           property="og:url"
-          content={`http://${process.env.ROOT_URL}`}
+          content={process.env.REACT_APP_ROOT_URL}
         />
         <meta
           property="og:type"
