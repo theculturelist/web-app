@@ -7,9 +7,9 @@ import cloudinary from 'cloudinary-core'
 const cl = cloudinary.Cloudinary.new();
 
 cl.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+  cloud_name: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.GATSBY_CLOUDINARY_API_KEY,
+  api_secret: process.env.GATSBY_CLOUDINARY_API_SECRET,
   secure: true,
 });
 
