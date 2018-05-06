@@ -4,15 +4,17 @@ import Img from 'react-image'
 import LazyLoad from 'react-lazyload'
 import cloudinary from 'cloudinary-core'
 
-cloudinary.config({
-  cloud_name: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.GATSBY_CLOUDINARY_API_KEY,
-  api_secret: process.env.GATSBY_CLOUDINARY_API_SECRET,
+const cl = cloudinary.Cloudinary.new();
+
+cl.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
   secure: true,
 });
 
 class CloudinaryImage extends Component {
-  imgUrl = cloudinary.url(this.props.src, this.props.transform)
+  imgUrl = cl.url(this.props.src, this.props.transform)
 
   getAspectRatio = (ratio) => {
     const ratioMap = {thumbnail: '1x1', widescreen: '16x9'};
