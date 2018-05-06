@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import Home from '../components/Home'
-import Venue from '../components/Venue'
-import InitScreen from '../components/InitScreen'
+import Home from './Home'
+import Venue from './Venue'
+import InitScreen from './InitScreen'
 import base from '../config/Rebase'
 
 class App extends Component {
