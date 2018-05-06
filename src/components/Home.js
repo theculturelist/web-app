@@ -5,15 +5,14 @@ import concat from 'lodash/concat'
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
 import sortBy from 'lodash/sortBy'
+import { hoursToday, metersAway, metersToMiles } from '../components/utilities'
 import NavBar from './NavBar'
 import LeftMenu from './LeftMenu'
-import { hoursToday } from './utilities'
 import SearchBar from './SearchBar'
 import Button from '@mandala-ui/button'
 import ToggleButton from './ToggleButton'
 import VenueList from './VenueList'
 import Message from './Message'
-import { metersAway, metersToMiles } from './utilities'
 
 class Home extends Component {
     tags = [

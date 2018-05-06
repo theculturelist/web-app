@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
-import NavBar from './NavBar'
-import VenueHeader from './VenueHeader'
-import HoursList from './HoursList'
-import RelatedVenues from './RelatedVenues'
-import EventList from './EventList'
 import base from '../config/Rebase'
-import CloudinaryImage from './CloudinaryImage'
+import NavBar from '../components/NavBar'
+import VenueHeader from '../components/VenueHeader'
+import HoursList from '../components/HoursList'
+import RelatedVenues from '../components/RelatedVenues'
+import EventList from '../components/EventList'
+import CloudinaryImage from '../components/CloudinaryImage'
 
 class Venue extends Component {
   state = { venue: false, loaded: false }

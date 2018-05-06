@@ -31,10 +31,10 @@ class App extends Component {
   render() {
     return (
       this.state.venuesLoaded ?
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/venues/:id" component={Venue} />
-        </Switch>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/venues/:id" component={Venue} />
+      </Switch>
       : <InitScreen />
     )
   }
