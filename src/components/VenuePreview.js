@@ -11,7 +11,7 @@ class VenuePreview extends PureComponent {
   render() {
     return(
       <article className="venue-preview animated fadeIn flex ph2 pl3-l pv3 w-100 w-50-m w-third-l">
-        <div className="b--light-silver ba bg-white br2 overflow-hidden w-100">
+        <div className="b--light-silver ba bg-white br2 overflow-hidden w-100 flex flex-column justify-between">
           <Link to={`/venues/${this.props.id}`} className="link dim">
             <CloudinaryImage
               className="b--light-gray bb pointer w-100"
@@ -32,11 +32,17 @@ class VenuePreview extends PureComponent {
              {`${this.props.city}`}
              {this.props.distance ? ` (${this.props.distance} Miles Away)` : null}
             </h3>
-            <div className="flex flex-wrap items-center">
+            <div className="flex flex-wrap">
               { map(Object.keys(this.props.tags), tag => (
-                  <Tag key={tag}>
-                    <i className={`icon-${tag.toLowerCase()}`} /> {tag}
-                  </Tag>
+                  <div className="ml1 mv1">
+                    <Tag
+                      color="blue"
+                      key={tag}
+                      pill
+                    >
+                      <i className={`icon-${tag.toLowerCase()}`} /> {tag}
+                    </Tag>
+                  </div>
                 ))
               }
             </div>
