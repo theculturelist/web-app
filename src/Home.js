@@ -9,7 +9,7 @@ import NavBar from './NavBar'
 import LeftMenu from './LeftMenu'
 import { hoursToday } from './utilities'
 import SearchBar from './SearchBar'
-import Button from './Button'
+import Button from '@mandala-ui/button'
 import ToggleButton from './ToggleButton'
 import VenueList from './VenueList'
 import Message from './Message'
@@ -124,22 +124,20 @@ class Home extends Component {
               <h2 className='f4'>Filters:</h2>
               <div className="flex">
                   <Button
+                  pill
                   color={'light-blue'}
-                  textColor={'white'}
-                  name={'Reset'}
-                  clickFunction={this.clearFilters}>
+                  onClick={this.clearFilters}>
                    Reset
                    <i className="icon-reset ml1" />
                   </Button>
                 <div className="dn-l ml2">
                   <Button
+                    pill
                     color={'white'}
-                    textColor={'blue'}
-                    name={'Apply'}
-                    clickFunction={this.toggleLeftMenu}
+                    onClick={this.toggleLeftMenu}
                   >
-                    Apply
-                    <i className="icon-apply ml1" />
+                    <span className="light-blue">Apply</span>
+                    <i className="icon-apply light-blue ml1" />
                   </Button>
                 </div>
               </div>

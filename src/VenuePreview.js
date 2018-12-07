@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import map from 'lodash/map'
-import { Link } from 'react-router-dom'
-import { hoursToday } from './utilities'
-import VenueHeader from './VenueHeader'
-import Tag from './Tag'
-import CloudinaryImage from './CloudinaryImage'
+import map from 'lodash/map';
+import { Link } from 'react-router-dom';
+import { hoursToday } from './utilities';
+import VenueHeader from './VenueHeader';
+import Tag from '@mandala-ui/tag';
+import CloudinaryImage from './CloudinaryImage';
 
 class VenuePreview extends PureComponent {
   render() {
@@ -33,7 +33,12 @@ class VenuePreview extends PureComponent {
              {this.props.distance ? ` (${this.props.distance} Miles Away)` : null}
             </h3>
             <div className="flex flex-wrap items-center">
-              { map(Object.keys(this.props.tags), t => (<Tag key={t} name={t} />)) }
+              { map(Object.keys(this.props.tags), tag => (
+                  <Tag key={tag}>
+                    <i className={`icon-${tag.toLowerCase()}`} /> {tag}
+                  </Tag>
+                ))
+              }
             </div>
           </div>
         </div>
