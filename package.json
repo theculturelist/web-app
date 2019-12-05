@@ -17,11 +17,11 @@
     "react-helmet": "5.2.0",
     "react-image": "2.2.1",
     "react-lazyload": "2.2.7",
-    "react-router-dom": "^4.3.1",
+    "react-router-dom": "5.1.2",
     "tachyons": "4.11.1"
   },
   "devDependencies": {
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.3.0"
   },
   "engines": {
     "node": "<=8.9.3",

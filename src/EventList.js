@@ -1,55 +1,53 @@
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types';
-import base from './config/Rebase'
-import concat from 'lodash/concat'
-import map from 'lodash/map'
-import EventListItem from './EventListItem'
+import React, { useState, useEffect } from 'react';
+import base from './config/Rebase';
+import concat from 'lodash/concat';
+import map from 'lodash/map';
+import EventListItem from './EventListItem';
 
-class EventList extends PureComponent {
-  static propTypes = {
-    events: PropTypes.object
-  }
+const EventList = () => {
+  const [eventsList, fillEventsList ] = useState([]);
+  const [eventsLoaded, loadEvents] = useState(false);
 
-  state = { eventsList: [], loaded: false }
-
-  componentDidMount() {
+  useEffect(() => {
     map(Object.keys(this.props.events), event => {
         base.fetch(`events/${event}`, {
           context: this,
         })
         .then(data => {
-          this.setState({ eventsList: concat(this.state.eventsList, data) })
-          this.checkIsFinished()
+          fillEventsList(concat(eventsList, data));
+          checkIsFinished()
         })
         .catch(error => {
           console.log(error)
         })
     })
-  }
+  })
 
-  checkIsFinished = () => {
-    if (this.state.eventsList.length === Object.keys(this.props.events).length) {
-      this.setState({ loaded: true })
+  const checkIsFinished = () => {
+    if (eventsList.length === Object.keys(this.props.events).length) {
+      loadEvents(true);
     }
+    return false;
   }
 
-  render() {
-    return(
-      this.state.loaded ?
-        <section>
-          <h3 className="lh-title ul">
-            Featured Programs and Exhibitions:
-          </h3>
-          <ul className="list pl0 center">
-            {map(this.state.eventsList, event => (
-              <EventListItem event={event} key={event.title}/>
-            ))}
+  return(
+    eventsLoaded ?
+      <section>
+        <h3 className="lh-title ul">
+          Featured Programs and Exhibitions:
+        </h3>
+        <ul className="list pl0 center">
+          {map(eventsList, event => (
+            <EventListItem
+              event={event}
+              key={event.title}
+            />
+          ))}
 
-          </ul>
-        </section>
-      : <div>LOADING</div>
-    )
-  }
+        </ul>
+      </section>
+    : <div>LOADING</div>
+  )
 }
 
 export default EventList

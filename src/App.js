@@ -1,43 +1,48 @@
-import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
-import Home from './Home'
-import Venue from './Venue'
-import InitScreen from './InitScreen'
-import base from './config/Rebase'
+import React, { useState, useEffect } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import Home from './Home';
+import Venue from './Venue';
+import InitScreen from './InitScreen';
+import base from './config/Rebase';
 
-class App extends Component {
-  state = {
-    venuesLoaded: false
-  }
+const App = () => {
+  const [venuesLoaded, loadVenues] = useState(false);
 
-  componentDidMount() {
+  useEffect(() => {
     if (sessionStorage.getItem('venues')) {
-      this.setState({venuesLoaded: true })
-    } else {
-      base.fetch('venues', {
-        context: this,
-        asArray: true
-      })
-      .then(data => {
-        sessionStorage.setItem('venues', JSON.stringify(data))
-        this.setState({venuesLoaded: true })
-      })
-      .catch(error => {
-        console.log(error)
-      })
+      loadVenues(true);
     }
-  }
 
-  render() {
-    return (
-      this.state.venuesLoaded ?
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/venues/:id" component={Venue} />
-        </Switch>
-      : <InitScreen />
-    )
-  }
-}
+    base.fetch('venues', {
+      context: this,
+      asArray: true
+    })
+    .then(data => {
+      sessionStorage.setItem('venues', JSON.stringify(data));
+
+    })
+    .then(() => loadVenues(true))
+    .catch(error => {
+      console.log(error)
+    });
+
+  }, []);
+
+  return (
+    venuesLoaded ?
+      <Switch>
+        <Route
+          component={Home}
+          exact
+          path="/"
+        />
+        <Route
+          component={Venue} 
+          path="/venues/:id"
+        />
+      </Switch>
+    : <InitScreen />
+  )
+};
 
 export default App
