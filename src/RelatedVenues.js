@@ -1,66 +1,58 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import concat from 'lodash/concat'
 import map from 'lodash/map'
 import base from './config/Rebase'
 import CloudinaryImage from './CloudinaryImage'
 
-class RelatedVenues extends Component {
-  state = { relatedVenues: [], loaded: false }
+const RelatedVenues = (props) => {
+  const [relatedVenues, setRelatedVenues] = useState([])
 
-  componentDidMount() {
-    map(Object.keys(this.props.venues), venue => {
+  useEffect(() => {
+    map(Object.keys(props.venues), venue => {
       base.fetch(`venues/${venue}`, {
         context: this,
       })
       .then(data => {
-        this.setState({ relatedVenues: concat(this.state.relatedVenues, data) })
-        this.checkIsFinished()
+        setRelatedVenues(concat(relatedVenues, data));
       })
       .catch(error => {
         console.log(error)
       })
     })
-  }
+  }, [props.venues, relatedVenues])
 
-  checkIsFinished = () => {
-    if (this.state.relatedVenues.length === Object.keys(this.props.venues).length) {
-      this.setState({ loaded: true })
-    }
-  }
 
-  render() {
-    return this.state.loaded ? (
-      <section className="related-venues animated fadeIn">
-        <h4 className="fw4 lh-copy mb1 underline">
-          You Might Also Like:
-        </h4>
-        <ul className="list pl0">
-          { map(this.state.relatedVenues, el => (
-            <li
-              className="flex items-center lh-copy ph0 pv2 bb b--black-10"
-              key={Math.random()}
-              >
-              <CloudinaryImage
-                alt={`${el.name.full}`}
-                className='w2 h2 w3-ns h3-ns br-100'
-                src={el.media.thumbnail}
-                transform={{quality: 'auto'}}
-              />
-              <div className="pl3 flex-auto">
-                <span className="f6 db black-70">
-                  <Link to={`/venues/${el.id}`} className="link blue dim">{el.name.proper} {el.name.full}</Link>
-                </span>
-                <span className="f6 db black-70">
-                  {el.address.city}, {el.address.state_short}
-                </span>
-              </div>
-            </li>
-          )) }
-        </ul>
-      </section>
-    ) : <div>LOADING</div>
-  }
+  return (
+    <section className="related-venues animated fadeIn">
+      <h4 className="fw4 lh-copy mb1 underline">
+        You Might Also Like:
+      </h4>
+      <ul className="list pl0">
+        { map(relatedVenues, venue => (
+          <li
+            className="flex items-center lh-copy ph0 pv2 bb b--black-10"
+            key={Math.random()}
+            >
+            <CloudinaryImage
+              alt={`${venue.name.full}`}
+              className='w2 h2 w3-ns h3-ns br-100'
+              src={venue.media.thumbnail}
+              transform={{quality: 'auto'}}
+            />
+            <div className="pl3 flex-auto">
+              <span className="f6 db black-70">
+                <Link to={`/venues/${venue.id}`} className="link blue dim">{venue.name.proper} {venue.name.full}</Link>
+              </span>
+              <span className="f6 db black-70">
+                {venue.address.city}, {venue.address.state_short}
+              </span>
+            </div>
+          </li>
+        )) }
+      </ul>
+    </section>
+  )
 }
 
 export default RelatedVenues

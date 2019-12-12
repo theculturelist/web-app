@@ -3,8 +3,6 @@ import { Helmet } from 'react-helmet'
 import NavBar from './NavBar'
 import VenueHeader from './VenueHeader'
 import HoursList from './HoursList'
-import RelatedVenues from './RelatedVenues'
-import EventList from './EventList'
 import base from './config/Rebase'
 import CloudinaryImage from './CloudinaryImage'
 
@@ -25,7 +23,7 @@ const Venue = (props) => {
   return (
     venueLoaded ?
       <article
-        className="animated fadeIn"
+        className="animated fadeIn vh-100"
         style={{
         background:
         `url(https://res.cloudinary.com/theculturelist/image/upload/e_blur:200/q_auto/${venueData.media.widescreen}) no-repeat center center fixed`,
@@ -78,10 +76,6 @@ const Venue = (props) => {
                     src={venueData.media.thumbnail}
                     transform={{quality: 'auto'}}
                   />
-
-                  { venueData.events ? <EventList events={venueData.events} /> : null }
-                  { venueData.related_venues ? <RelatedVenues venues={venueData.related_venues} /> : null }
-
                 </section>
 
                 <section className="w-100 w-50-ns pl4-ns">
@@ -95,7 +89,7 @@ const Venue = (props) => {
                     <h5 className="mb1">
                       Website:
                     </h5>
-                    <a className="blue dim fade" href={`http://${venueData.website}`} target="_blank">
+                    <a className="blue dim fade" href={`http://${venueData.website}`} target="_blank" rel="noopener noreferrer">
                       {venueData.website}
                     </a>
                   </article>
@@ -106,7 +100,7 @@ const Venue = (props) => {
                     </h5>
                     <a
                       className="blue fade link mt0 pt0"
-                      href={`https://maps.apple.com/?ll=${venueData.location.lat},${venueData.location.lng}&q=${venueData.name.full}`} target="_blank"
+                      href={`https://maps.apple.com/?ll=${venueData.location.lat},${venueData.location.lng}&q=${venueData.name.full}`} target="_blank" rel="noopener noreferrer"
                     >
                       {venueData.address.formatted_address}
                     </a>

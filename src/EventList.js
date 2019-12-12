@@ -1,37 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import base from './config/Rebase';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
 import EventListItem from './EventListItem';
 
-const EventList = () => {
+const EventList = (props) => {
   const [eventsList, fillEventsList ] = useState([]);
-  const [eventsLoaded, loadEvents] = useState(false);
 
-  useEffect(() => {
-    map(Object.keys(this.props.events), event => {
+  useLayoutEffect(() => {
+    map(Object.keys(props.events), event => {
         base.fetch(`events/${event}`, {
           context: this,
         })
-        .then(data => {
-          fillEventsList(concat(eventsList, data));
-          checkIsFinished()
-        })
-        .catch(error => {
-          console.log(error)
-        })
+        .then(data => {fillEventsList(concat(eventsList, data)) })
+        .catch(error => { console.log(error) })
     })
-  })
-
-  const checkIsFinished = () => {
-    if (eventsList.length === Object.keys(this.props.events).length) {
-      loadEvents(true);
-    }
-    return false;
-  }
+  }, [props.events, eventsList])
 
   return(
-    eventsLoaded ?
       <section>
         <h3 className="lh-title ul">
           Featured Programs and Exhibitions:
@@ -43,10 +29,8 @@ const EventList = () => {
               key={event.title}
             />
           ))}
-
         </ul>
       </section>
-    : <div>LOADING</div>
   )
 }
 
