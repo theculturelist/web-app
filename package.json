@@ -7,7 +7,7 @@
     "cloudinary": "1.11.0",
     "firebase": "4.8.0",
     "geolib": "2.0.22",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "moment": "2.22.2",
     "promised-location": "1.0.1",
     "prop-types": "15.7.2",
